@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SZABÓ István — Luthier | France</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap"
+      rel="stylesheet">
+    <style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #f5f0e8;
+    --warm-white: #faf8f4;
+    --dark: #1a1612;
+    --brown: #6b4c2a;
+    --gold: #c4973a;
+    --text: #2e2620;
+    --muted: #8a7b6e;
+    --border: rgba(106,76,42,0.18);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,248,244,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    color: var(--dark);
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+  .nav-logo span {
+    display: block;
+    font-size: 0.72rem;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: var(--muted);
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--brown); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6rem 4rem 6rem 6rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 5vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--brown);
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 3rem;
+  }
+
+  .hero-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--gold);
+    margin-bottom: 2rem;
+  }
+
+  .hero-image {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+  }
+
+  .hero-image-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(250,248,244,0.15) 0%, transparent 30%);
+  }
+
+  /* SECTION SHARED */
+  section { padding: 7rem 0; }
+
+  .container {
+    max-width: 1160px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 1.5rem;
+  }
+
+  .ornament {
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+    margin: 1.5rem 0 2.5rem;
+  }
+
+  /* ABOUT */
+  #about { background: var(--warm-white); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7rem;
+    align-items: start;
+  }
+
+  .about-body {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.85;
+  }
+
+  .about-body p + p { margin-top: 1.2rem; }
+
+  .about-side {
+    padding-top: 1rem;
+  }
+
+  .about-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-style: italic;
+    line-height: 1.55;
+    color: var(--brown);
+    border-left: 2px solid var(--gold);
+    padding-left: 1.8rem;
+    margin-top: 3rem;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--cream); }
+
+  .testimonials-intro {
+    text-align: center;
+    max-width: 580px;
+    margin: 0 auto 5rem;
+  }
+
+  .testimonials-intro .ornament { margin: 1.5rem auto 0; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .testimonial-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    padding: 2.5rem 2rem;
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '\201C';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    line-height: 0.8;
+    color: var(--gold);
+    opacity: 0.4;
+    position: absolute;
+    top: 1.2rem;
+    left: 1.5rem;
+  }
+
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 1.8rem;
+    padding-top: 1.5rem;
+  }
+
+  .testimonial-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 0.75rem;
+    border: 2px solid var(--border);
+  }
+
+  .testimonial-name {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--dark);
+    margin-bottom: 0.2rem;
+  }
+
+  .testimonial-role {
+    font-size: 0.74rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* CONTACTS */
+  #contacts { background: var(--dark); }
+
+  #contacts .section-title { color: var(--cream); }
+  #contacts .section-label { color: var(--gold); }
+
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    margin-top: 3rem;
+  }
+
+  .contact-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+
+  .contact-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border: 1px solid rgba(196,151,58,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .contact-icon svg { width: 15px; height: 15px; stroke: var(--gold); fill: none; stroke-width: 1.5; }
+
+  .contact-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .contact-value {
+    color: rgba(245,240,232,0.85);
+    font-size: 0.95rem;
+    text-decoration: none;
+    line-height: 1.55;
+  }
+
+  .contact-value:hover { color: var(--gold); }
+
+  .contact-map {
+    border: 1px solid rgba(196,151,58,0.2);
+    overflow: hidden;
+  }
+
+  .contact-map iframe {
+    width: 100%;
+    height: 320px;
+    display: block;
+    border: none;
+    filter: grayscale(1) brightness(0.4) sepia(0.3);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    border-top: 1px solid rgba(196,151,58,0.15);
+    padding: 2rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: rgba(245,240,232,0.5);
+    letter-spacing: 0.08em;
+  }
+
+  .footer-copy {
+    font-size: 0.72rem;
+    color: rgba(245,240,232,0.3);
+    letter-spacing: 0.1em;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-image { height: 55vw; }
+    .hero-text { padding: 4rem 2rem; }
+    .about-grid, .testimonials-grid, .contacts-grid { grid-template-columns: 1fr; gap: 3rem; }
+    nav { padding: 0 1.5rem; }
+    nav .nav-links { gap: 1.5rem; }
+    .container { padding: 0 1.5rem; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+  </head>
+  <body>
+    <nav> <a href="#" class="nav-logo"> SZABÓ István <span>faiseur
+          d'instruments&nbsp;<b> </b>|&nbsp; France</span> </a>
+      <ul class="nav-links">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">&nbsp;| On The Workbench<br>
+          </a></li>
+        <li><a href="#">&nbsp;| My Instruments</a></li>
+        <li><a href="#contacts">&nbsp;| Contacts</a></li>
+      </ul>
+    </nav>
+    <!-- HERO -->
+    <section class="hero" style="padding-top:0;">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Violin Maker | faiseur d'instruments</p>
+        <h1 class="hero-title">SZABÓ <em>István</em></h1>
+        <p class="hero-subtitle">Luthier &nbsp;·&nbsp; France</p>
+        <div class="hero-divider"></div>
+        <p style="font-size:0.92rem; color:var(--muted); max-width:380px; line-height:1.8;">Handcrafted
+          violins violas and cellos, born from decades of devotion to the art of
+          lutherie — from Paris to Southeast Asia to the heart of Lorraine.</p>
+      </div>
+      <div class="hero-image"> <img src="https://storage.boxmode.com/13068767089/image_3.jpg?profile=original"
+          alt="István Szabó, luthier">
+        <div class="hero-image-overlay"></div>
+      </div>
+    </section>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <p class="section-label">About me</p>
+            <h2 class="section-title">A Life Devoted<br>
+              to the Violin</h2>
+            <span class="ornament"></span>
+            <div class="about-body">
+              <p>I was born in 1966 in former Yugoslavia, and began my musical
+                journey playing the violin and the viola. While pursuing my
+                university studies, my consuming love and passion for the violin
+                compelled me to embark on the road of Lutherie and Violin
+                Making.</p>
+              <p>This journey commenced with my former violin teacher, and
+                later, under the apprenticeship of the great master luthier
+                Lendjel Laslo (Lengyel László) in Paris.</p>
+              <p>I have had the honour of serving professional performing
+                musicians, aspiring talents, and avid music and violin-lovers in
+                Asia — Taiwan, Singapore, Malaysia and Indonesia — for 20 years.
+                I had the privilege to make new instruments for these musicians,
+                as well as to assist them with sound adjustments, maintenance,
+                repair and upkeep, and adapting their instruments to the unique
+                conditions of Southeast Asia.</p>
+              <p>My work later brought me to Mirecourt, France, where I
+                continued my work for several years. I am now based in
+                Fraisnes-en-Saintois.</p>
+            </div>
+          </div>
+          <div class="about-side">
+            <blockquote class="about-quote"> "Through his skill, even a simple
+              wood is transformed into extraordinary music." </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="testimonials-intro">
+          <p class="section-label">What People Say</p>
+          <h2 class="section-title">Voices from<br>
+            the Stage</h2>
+          <span class="ornament"></span> </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">After playing several of his violins, I
+              can say with certainty that through his skill, even a simple wood
+              is transformed into extraordinary music. His artistry as a luthier
+              is a true reflection of his passion and dedication to every
+              instrument he creates.</p>
+            <img class="testimonial-photo" src="https://storage.boxmode.com/13337084475/Gabor-01.jpg?profile=original"
+              alt="Gabor Szabo">
+            <p class="testimonial-name">Gabor Szabo</p>
+            <p class="testimonial-role">Concertmaster, Madrid Soloists Chamber
+              Orchestra</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">The violins crafted by Istvan's hands
+              are true masterpieces, where art and technical perfection
+              converge. Each instrument unveils a rich and profound palette of
+              colors, allowing the performer to explore an infinite world of
+              nuances and subtleties.</p>
+            <img class="testimonial-photo" src="https://storage.boxmode.com/13380788673/WhatsApp%20Image%202024-12-28%20at%2015.40.22.jpeg?profile=original"
+              alt="Marcos Lázaro">
+            <p class="testimonial-name">Marcos Lázaro</p>
+            <p class="testimonial-role">Violinist &amp; Teacher, Gregorian
+              Institute of Lisbon</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">I've had the pleasure of playing and
+              working with István's handcrafted violins, and I can confidently
+              say that they are truly exceptional instruments. The level of
+              craftsmanship and attention to detail is reminiscent of the old
+              Italian masters.</p>
+            <img class="testimonial-photo" src="https://storage.boxmode.com/13443239266/WhatsApp%20Image%202025-02-01%20at%2016.29.15_24dda14d.jpg?profile=original"
+              alt="Roman Kholmatov">
+            <p class="testimonial-name">Roman Kholmatov</p>
+            <p class="testimonial-role">Associate Concertmaster, Orquesta de la
+              Comunitat Valenciana</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACTS -->
+    <section id="contacts">
+      <div class="container">
+        <p class="section-label">Get in touch</p>
+        <h2 class="section-title" style="color:var(--cream);">Contact</h2>
+        <div class="contacts-grid">
+          <div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 5.98 5.98l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <p class="contact-label">Phone</p>
+                <a class="contact-value" href="tel:+33614617146">+33 6 14 61 71
+                  46</a> </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
+                    cx="12" cy="10" r="3"></circle></svg> </div>
+              <div>
+                <p class="contact-label">Address</p>
+                <p class="contact-value">1bis Rue des Grandes Haies<br>
+                  54930 Fraisnes en Saintois<br>
+                  France</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline
+                    points="22,6 12,13 2,6"></polyline></svg> </div>
+              <div>
+                <p class="contact-label">Email</p>
+                <a class="contact-value" href="mailto:szistvan@zoho.com">szistvan@zoho.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-map"> <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=6.1,48.4,6.3,48.5&amp;layer=mapnik&amp;marker=48.452,6.205"
+              title="Location map" loading="lazy"> </iframe> </div>
+        </div>
+      </div>
+    </section>
+    <footer> <span class="footer-logo">SZABÓ István — Violin maker | Faiseur
+        d'instruments</span> <span class="footer-copy">Fraisnes-en-Saintois,
+        France</span>
+    </footer>
+  </body>
+</html>
