@@ -1,0 +1,83 @@
+/* post-style.css
+   Extra styles specifically for individual "On The Workbench" post pages.
+   This file sits inside OnTheWorkbench/ and is shared by every post.
+   It does not change or replace the main style.css used by the homepage. */
+
+.post {
+  padding: 9rem 0 6rem;
+  background: var(--warm-white);
+  min-height: 70vh;
+}
+
+.post-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.back-link {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  margin-bottom: 3rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: var(--brown);
+}
+
+.post-date {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+}
+
+.post-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  line-height: 1.15;
+  color: var(--dark);
+}
+
+.post-body {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text);
+  margin-top: 2.5rem;
+}
+
+.post-body p + p {
+  margin-top: 1.3rem;
+}
+
+.post-image {
+  margin: 2.5rem 0;
+}
+
+.post-image img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--border);
+}
+
+.post-image figcaption {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 0.6rem;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .post-container { padding: 0 1.5rem; }
+  .post { padding: 7rem 0 4rem; }
+}

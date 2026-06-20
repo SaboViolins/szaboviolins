@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On The Workbench — SZABÓ István | Luthier</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="post-style.css">
+    <style>
+      .workbench-intro {
+        max-width: 720px;
+        margin: 0 auto 4rem;
+        padding: 0 3rem;
+      }
+      .post-list {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 3rem;
+      }
+      .post-card {
+        padding: 2.2rem 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .post-card:first-child {
+        padding-top: 0;
+      }
+      .post-card-date {
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--gold);
+        margin-bottom: 0.6rem;
+      }
+      .post-card-title {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.7rem;
+        font-weight: 400;
+        margin-bottom: 0.6rem;
+      }
+      .post-card-title a {
+        color: var(--dark);
+        text-decoration: none;
+      }
+      .post-card-title a:hover {
+        color: var(--brown);
+      }
+      .post-card-summary {
+        color: var(--text);
+        font-size: 0.96rem;
+        line-height: 1.7;
+      }
+      .post-card-readmore {
+        display: inline-block;
+        margin-top: 0.8rem;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--brown);
+        text-decoration: none;
+      }
+      .empty-state {
+        text-align: center;
+        color: var(--muted);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.2rem;
+        font-style: italic;
+        padding: 3rem 0;
+      }
+      .archive-link {
+        text-align: center;
+        margin-top: 3rem;
+        padding-bottom: 4rem;
+      }
+      .archive-link a {
+        font-size: 0.78rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border);
+        padding-bottom: 4px;
+      }
+      .archive-link a:hover {
+        color: var(--brown);
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a href="../index.html" class="nav-logo">
+        SZABÓ István
+        <span>faiseur d'instruments&nbsp;|&nbsp;France</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="index.html">On The Workbench</a></li>
+        <li><a href="../MyInstruments/index.html">My Instruments</a></li>
+        <li><a href="../index.html#contacts">Contacts</a></li>
+      </ul>
+    </nav>
+
+    <section class="post" style="padding-bottom:2rem;">
+      <div class="workbench-intro">
+        <p class="section-label">Journal</p>
+        <h1 class="section-title">On The Workbench</h1>
+        <span class="ornament"></span>
+        <p style="color:var(--muted); font-size:0.98rem; line-height:1.8;">
+          Notes from the workshop — instruments in progress, wood and
+          varnish experiments, and the occasional thought on sound and craft.
+        </p>
+      </div>
+
+      <div class="post-list" id="post-list">
+        <p class="empty-state">Loading posts…</p>
+      </div>
+
+      <div class="archive-link">
+        <a href="#">View past years</a>
+      </div>
+    </section>
+
+    <footer>
+      <span class="footer-logo">SZABÓ István — Violin maker | Faiseur d'instruments</span>
+      <span class="footer-copy">Fraisnes-en-Saintois, France</span>
+    </footer>
+
+    <script>
+      // Loads posts.json and displays the posts for the current year,
+      // newest first. Each entry in posts.json should look like:
+      // { "title": "...", "date": "2026-01-15", "summary": "...", "link": "2026/2026-01-15-welcome-message/index.html" }
+
+      fetch('posts.json')
+        .then(response => response.json())
+        .then(posts => {
+          const list = document.getElementById('post-list');
+          const currentYear = new Date().getFullYear().toString();
+
+          const thisYearPosts = posts
+            .filter(post => post.date.startsWith(currentYear))
+            .sort((a, b) => b.date.localeCompare(a.date));
+
+          if (thisYearPosts.length === 0) {
+            list.innerHTML = '<p class="empty-state">No posts yet for ' + currentYear + ' — check back soon.</p>';
+            return;
+          }
+
+          list.innerHTML = thisYearPosts.map(post => {
+            const dateObj = new Date(post.date + 'T00:00:00');
+            const formattedDate = dateObj.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+            return `
+              <article class="post-card">
+                <p class="post-card-date">${formattedDate}</p>
+                <h2 class="post-card-title"><a href="${post.link}">${post.title}</a></h2>
+                <p class="post-card-summary">${post.summary}</p>
+                <a class="post-card-readmore" href="${post.link}">Read more &rarr;</a>
+              </article>
+            `;
+          }).join('');
+        })
+        .catch(error => {
+          document.getElementById('post-list').innerHTML =
+            '<p class="empty-state">Could not load posts right now.</p>';
+          console.error('Error loading posts.json:', error);
+        });
+    </script>
+  </body>
+</html>
