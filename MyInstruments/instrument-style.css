@@ -1,0 +1,184 @@
+/* instrument-style.css
+   Extra styles for the "My Instruments" gallery and individual instrument pages.
+   Lives inside MyInstruments/ and is shared by the landing page and every
+   instrument's own page. Does not touch or replace the main style.css. */
+
+.gallery-intro {
+  max-width: 720px;
+  margin: 0 auto 4rem;
+  padding: 0 3rem;
+}
+
+.instrument-list {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.instrument-card {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2.5rem;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+}
+
+.instrument-card:first-child {
+  padding-top: 0;
+}
+
+.instrument-card-photos {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+}
+
+.instrument-card-photos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.instrument-card-info-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+}
+
+.instrument-card-info-title a {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+.instrument-card-info-title a:hover {
+  color: var(--brown);
+}
+
+.status-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 0.15rem 0.6rem;
+  border-radius: 2px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.6rem;
+}
+
+.status-available {
+  color: #4d7c5f;
+  background: rgba(77,124,95,0.10);
+}
+
+.status-sold {
+  color: #a14b4b;
+  background: rgba(161,75,75,0.10);
+}
+
+.status-private {
+  color: var(--muted);
+  background: rgba(138,123,110,0.10);
+}
+
+.instrument-card-summary {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-top: 0.6rem;
+}
+
+.instrument-card-readmore {
+  display: inline-block;
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brown);
+  text-decoration: none;
+}
+
+/* Individual instrument page */
+.instrument-page {
+  padding: 9rem 0 6rem;
+  background: var(--warm-white);
+}
+
+.instrument-page-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.instrument-title-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.instrument-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 2.5rem 0;
+}
+
+.instrument-gallery img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.instrument-description {
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--text);
+}
+
+.instrument-description p + p {
+  margin-top: 1.3rem;
+}
+
+.instrument-specs {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+}
+
+.instrument-specs dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-top: 0.8rem;
+}
+
+.instrument-specs dd {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-left: 0;
+}
+
+@media (max-width: 900px) {
+  .instrument-card {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+  .instrument-card-photos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .instrument-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .instrument-page-container { padding: 0 1.5rem; }
+  .instrument-list { padding: 0 1.5rem; }
+  .gallery-intro { padding: 0 1.5rem; }
+}

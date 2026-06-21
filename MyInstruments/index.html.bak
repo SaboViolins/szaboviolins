@@ -10,8 +10,11 @@
     <link rel="stylesheet" href="instrument-style.css">
   </head>
   <body>
-    <nav> <a href="../index.html" class="nav-logo"> SZABÓ István <span>faiseur
-          d'instruments&nbsp;|&nbsp;France</span> </a>
+    <nav>
+      <a href="../index.html" class="nav-logo">
+        SZABÓ István
+        <span>faiseur d'instruments&nbsp;|&nbsp;France</span>
+      </a>
       <ul class="nav-links">
         <li><a href="../index.html">Home</a></li>
         <li><a href="../OnTheWorkbench/index.html">On The Workbench</a></li>
@@ -19,20 +22,29 @@
         <li><a href="../index.html#contacts">Contacts</a></li>
       </ul>
     </nav>
+
     <section class="post" style="padding-bottom:2rem;">
       <div class="gallery-intro">
         <p class="section-label">Gallery</p>
-        <h1 class="section-title">Carved by Sound</h1>
+        <h1 class="section-title">My Instruments</h1>
         <span class="ornament"></span>
-        <p style="color:var(--muted); font-size:0.98rem; line-height:1.8;">&nbsp;&nbsp;
-          </p> </div>
+        <p style="color:var(--muted); font-size:0.98rem; line-height:1.8;">
+          A selection of violins, violas, cellos and basses I have made —
+          newest first. Click on any instrument to see more photos and
+          its full description.
+        </p>
+      </div>
+
       <div class="instrument-list" id="instrument-list">
         <p class="empty-state">Loading instruments…</p>
       </div>
     </section>
-    <footer> <span class="footer-logo">SZABÓ István — Violin maker | Faiseur
-        d'instruments</span> <span class="footer-copy">Fraisnes-en-Saintois,
-        France</span> </footer>
+
+    <footer>
+      <span class="footer-logo">SZABÓ István — Violin maker | Faiseur d'instruments</span>
+      <span class="footer-copy">Fraisnes-en-Saintois, France</span>
+    </footer>
+
     <script>
       // Loads instruments.json and displays every instrument, newest first.
       // Each entry in instruments.json should look like:
