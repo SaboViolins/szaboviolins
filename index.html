@@ -11,7 +11,10 @@
   <body>
     <nav> <a href="index.html" class="nav-logo"> SZABÓ István <span>faiseur
           d'instruments&nbsp;<b> </b>|&nbsp; France</span> </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="index.html">Home</a></li>
         <li><a href="OnTheWorkbench/index.html">&nbsp;| On The Workbench<br>
           </a></li>
@@ -19,6 +22,12 @@
         <li><a href="#contacts">&nbsp;| Contacts</a></li>
       </ul>
     </nav>
+    <script>
+      document.getElementById('navToggle').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('navLinks').classList.toggle('open');
+      });
+    </script>
     <!-- HERO -->
     <section class="hero" style="padding-top:0;">
       <div class="hero-text">
