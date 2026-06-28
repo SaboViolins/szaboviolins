@@ -409,7 +409,8 @@ footer {
 
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; }
-  .hero-image { height: 55vw; }
+  .hero-image { height: auto; }
+  .hero-image img { height: auto; object-fit: contain; }
   .hero-text { padding: 4rem 2rem; }
   .about-grid, .testimonials-grid, .contacts-grid { grid-template-columns: 1fr; gap: 3rem; }
   nav { padding: 0 1.5rem; }
