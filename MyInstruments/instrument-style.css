@@ -135,6 +135,12 @@
   object-fit: cover;
   border: 1px solid var(--border);
   display: block;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.instrument-gallery img:hover {
+  opacity: 0.85;
 }
 
 .instrument-description {
@@ -165,6 +171,71 @@
   font-size: 0.95rem;
   color: var(--text);
   margin-left: 0;
+}
+
+/* LIGHTBOX */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(26,22,18,0.96);
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-img {
+  max-width: 90vw;
+  max-height: 88vh;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: rgba(245,240,232,0.7);
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+  transition: color 0.2s;
+}
+
+.lightbox-close:hover {
+  color: var(--gold);
+}
+
+.lightbox-zone-prev,
+.lightbox-zone-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 30%;
+  cursor: pointer;
+}
+
+.lightbox-zone-prev { left: 0; }
+.lightbox-zone-next { right: 0; }
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,232,0.4);
+  font-family: 'Jost', sans-serif;
 }
 
 @media (max-width: 900px) {

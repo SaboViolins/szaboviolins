@@ -70,5 +70,63 @@
       <span class="footer-logo">SZABÓ István — Violin maker | Faiseur d'instruments</span>
       <span class="footer-copy">Fraisnes-en-Saintois, France</span>
     </footer>
+<!-- LIGHTBOX — add this block just before </body> on every instrument page -->
+
+<!-- Lightbox overlay -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <div class="lightbox-zone-prev" id="lightboxPrev"></div>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <div class="lightbox-zone-next" id="lightboxNext"></div>
+  <p class="lightbox-counter" id="lightboxCounter"></p>
+</div>
+
+<script>
+  (function () {
+    // Collect all images from the instrument gallery
+    var imgs = Array.from(document.querySelectorAll('.instrument-gallery img'));
+    var current = 0;
+    var lightbox = document.getElementById('lightbox');
+    var lightboxImg = document.getElementById('lightboxImg');
+    var lightboxCounter = document.getElementById('lightboxCounter');
+
+    function show(index) {
+      current = (index + imgs.length) % imgs.length;
+      lightboxImg.src = imgs[current].src;
+      lightboxImg.alt = imgs[current].alt;
+      lightboxCounter.textContent = (current + 1) + ' / ' + imgs.length;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    // Open on image click
+    imgs.forEach(function (img, i) {
+      img.addEventListener('click', function () { show(i); });
+    });
+
+    // Close button
+    document.getElementById('lightboxClose').addEventListener('click', close);
+
+    // Click zones: left = previous, right = next, centre = close
+    document.getElementById('lightboxPrev').addEventListener('click', function () { show(current - 1); });
+    document.getElementById('lightboxNext').addEventListener('click', function () { show(current + 1); });
+
+    // Click on the image itself (centre) closes
+    lightboxImg.addEventListener('click', close);
+
+    // Close on Escape key
+    document.addEventListener('keydown', function (e) {
+      if (!lightbox.classList.contains('active')) return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>
   </body>
 </html>
