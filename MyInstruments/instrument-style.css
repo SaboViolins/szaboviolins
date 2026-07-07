@@ -207,8 +207,9 @@
   font-size: 2rem;
   line-height: 1;
   cursor: pointer;
-  padding: 0.3rem 0.6rem;
+  padding: 0.8rem;
   transition: color 0.2s;
+  z-index: 1001;
 }
 
 .lightbox-close:hover {
