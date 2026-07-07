@@ -93,13 +93,28 @@
         SZABÓ István
         <span>faiseur d'instruments&nbsp;|&nbsp;France</span>
       </a>
-      <ul class="nav-links">
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
         <li><a href="../index.html">Home</a></li>
         <li><a href="index.html">On The Workbench</a></li>
         <li><a href="../MyInstruments/index.html">My Instruments</a></li>
         <li><a href="../index.html#contacts">Contacts</a></li>
       </ul>
     </nav>
+    <script>
+      document.getElementById('navToggle').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('navLinks').classList.toggle('open');
+      });
+      document.querySelectorAll('#navLinks a').forEach(function(link) {
+        link.addEventListener('click', function() {
+          document.getElementById('navToggle').classList.remove('open');
+          document.getElementById('navLinks').classList.remove('open');
+        });
+      });
+    </script>
 
     <section class="post" style="padding-bottom:2rem;">
       <div class="workbench-intro">
@@ -127,10 +142,6 @@
     </footer>
 
     <script>
-      // Loads posts.json and displays the posts for the current year,
-      // newest first. Each entry in posts.json should look like:
-      // { "title": "...", "date": "2026-01-15", "summary": "...", "link": "2026/2026-01-15-welcome-message/index.html" }
-
       fetch('posts.json')
         .then(response => response.json())
         .then(posts => {
