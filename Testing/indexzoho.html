@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SZABÓ István — Luthier | France</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&amp;family=Jost:wght@300;400;500&amp;display=swap"
+      rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <nav> <a href="index.html" class="nav-logo"> SZABÓ István <span>faiseur
+          d'instruments&nbsp;<b> </b>|&nbsp; France</span> </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="OnTheWorkbench/index.html">&nbsp;| On The Workbench<br>
+          </a></li>
+        <li><a href="MyInstruments/index.html">&nbsp;| My Instruments</a></li>
+        <li><a href="#contacts">&nbsp;| Contacts</a></li>
+      </ul>
+    </nav>
+    <script>
+      document.getElementById('navToggle').addEventListener('click', function () {
+        this.classList.toggle('open');
+        document.getElementById('navLinks').classList.toggle('open');
+      });
+      document.querySelectorAll('#navLinks a').forEach(function(link) {
+        link.addEventListener('click', function() {
+        document.getElementById('navToggle').classList.remove('open');
+        document.getElementById('navLinks').classList.remove('open');
+        });
+      });
+      </script>
+    <!-- HERO -->
+    <section class="hero" style="padding-top:0;">
+      <div class="hero-text">
+        <p class="hero-eyebrow">Violin Maker | faiseur d'instruments</p>
+        <h1 class="hero-title">SZABÓ <em>István</em></h1>
+        <p class="hero-subtitle">Luthier &nbsp;·&nbsp; France</p>
+        <div class="hero-divider"></div>
+        <p style="font-size:0.92rem; color:var(--muted); max-width:380px; line-height:1.8;">Handcrafted
+          violins violas and cellos, born from decades of devotion to the art of
+          lutherie — from Paris to Southeast Asia to the heart of Lorraine.</p>
+      </div>
+      <div class="hero-image"> <img src="images/Pista.jpg" alt="István Szabó, luthier">
+        <div class="hero-image-overlay"></div>
+      </div>
+    </section>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <p class="section-label">About me</p>
+            <h2 class="section-title">A Life Devoted<br>
+              to the Violin</h2>
+            <span class="ornament"></span>
+            <div class="about-body">
+              <p>I was born in 1966 in former Yugoslavia, and began my musical
+                journey playing the violin and the viola. While pursuing my
+                university studies, my consuming love and passion for the violin
+                compelled me to embark on the road of Lutherie and Violin
+                Making.</p>
+              <p>This journey commenced with my former violin teacher, and
+                later, under the apprenticeship of the great master luthier
+                Lendjel Laslo (Lengyel László) in Paris.</p>
+              <p>I have had the honour of serving professional performing
+                musicians, aspiring talents, and avid music and violin-lovers in
+                Asia — Taiwan, Singapore, Malaysia and Indonesia — for 20 years.
+                I had the privilege to make new instruments for these musicians,
+                as well as to assist them with sound adjustments, maintenance,
+                repair and upkeep, and adapting their instruments to the unique
+                conditions of Southeast Asia.</p>
+              <p>My work later brought me to Mirecourt, France, where I
+                continued my work for several years. I am now based in
+                Fraisnes-en-Saintois.</p>
+            </div>
+          </div>
+          <div class="about-side">
+            <blockquote class="about-quote"> "Through his skill, even a simple
+              wood is transformed into extraordinary music." </blockquote>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container">
+        <div class="testimonials-intro">
+          <p class="section-label">What People Say</p>
+          <h2 class="section-title">Voices from<br>
+            the Stage</h2>
+          <span class="ornament"></span> </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <p class="testimonial-text">After playing several of his violins, I
+              can say with certainty that through his skill, even a simple wood
+              is transformed into extraordinary music. His artistry as a luthier
+              is a true reflection of his passion and dedication to every
+              instrument he creates.</p>
+            <img class="testimonial-photo" src="images/Gabor.jpg" alt="Gabor Szabo">
+            <p class="testimonial-name">Gabor Szabo</p>
+            <p class="testimonial-role">Concertmaster, Madrid Soloists Chamber
+              Orchestra</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">The violins crafted by Istvan's hands
+              are true masterpieces, where art and technical perfection
+              converge. Each instrument unveils a rich and profound palette of
+              colors, allowing the performer to explore an infinite world of
+              nuances and subtleties.</p>
+            <img class="testimonial-photo" src="images/Marcos.jpg" alt="Marcos Lázaro">
+            <p class="testimonial-name">Marcos Lázaro</p>
+            <p class="testimonial-role">Violinist &amp; Teacher, Gregorian
+              Institute of Lisbon</p>
+          </div>
+          <div class="testimonial-card">
+            <p class="testimonial-text">I've had the pleasure of playing and
+              working with István's handcrafted violins, and I can confidently
+              say that they are truly exceptional instruments. The level of
+              craftsmanship and attention to detail is reminiscent of the old
+              Italian masters.</p>
+            <img class="testimonial-photo" src="images/Roman.jpg" alt="Roman Kholmatov">
+            <p class="testimonial-name">Roman Kholmatov</p>
+            <p class="testimonial-role">Associate Concertmaster, Orquesta de la
+              Comunitat Valenciana</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- CONTACTS -->
+    <section id="contacts">
+      <div class="container">
+        <p class="section-label">Get in touch</p>
+        <h2 class="section-title" style="color:var(--cream);">Contact</h2>
+        <div class="contacts-grid">
+          <div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.87a16 16 0 0 0 5.98 5.98l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </div>
+              <div>
+                <p class="contact-label">Phone</p>
+                <a class="contact-value" href="tel:+33614617146">+33 6 14 61 71
+                  46</a> </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle
+                    cx="12" cy="10" r="3"></circle></svg> </div>
+              <div>
+                <p class="contact-label">Address</p>
+                <p class="contact-value">1bis Rue des Grandes Haies<br>
+                  54930 Fraisnes en Saintois<br>
+                  France</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline
+                    points="22,6 12,13 2,6"></polyline></svg> </div>
+              <div>
+                <p class="contact-label">Email</p>
+                <a class="contact-value" href="mailto:szistvan@zoho.com">szistvan@zoho.com</a>
+              </div>
+            </div>
+          </div>
+          <div class="contact-map"> <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=5.9586,48.2739,6.1586,48.4739&amp;layer=mapnik&amp;marker=48.373933,6.058618"
+              title="Location map" loading="lazy"> </iframe> </div>
+        </div>
+      </div>
+    </section>
+    <footer> <span class="footer-logo">SZABÓ István — Violin maker | Faiseur
+        d'instruments</span> <span class="footer-copy">Fraisnes-en-Saintois,
+        France</span> </footer>
+
+<script>window.$zoho=window.$zoho || {};$zoho.salesiq=$zoho.salesiq||{ready:function(){}}</script><script id="zsiqscript" src="https://salesiq.zohopublic.com/widget?wc=siqa85a06f06a6f8eb15a9a1d0c081adf4552996e3cd29d7dd80ff11dacfd47cd5f" defer></script>
+        
+  </body>
+</html>
