@@ -73,13 +73,15 @@
         opacity: 0.75;
       }
 
-      .chat-wrapper {
-        width: 100%;
-        max-width: 480px;
-        margin-top: 2rem;
-        flex: 1;
-        min-height: 350px;
-      }
+	.chat-wrapper {
+	  width: 100%;
+	  max-width: 480px;
+	  margin-top: 2rem;
+	  flex: 1;
+	  min-height: 350px;
+	  overflow: hidden;
+	  padding: 0 0.5rem;
+	}
 
       #tawk_6a668afd85c9821d4774c81b {
         width: 100%;
@@ -94,6 +96,15 @@
         color: var(--muted);
         opacity: 0.4;
       }
+ 	     @media (max-width: 600px) {
+ 	 .chat-wrapper {
+	    max-width: 100%;
+	    padding: 0;
+	  }
+	  body {
+	    padding: 2rem 1rem 2rem;
+	  }
+	}
     </style>
   </head>
   <body>
