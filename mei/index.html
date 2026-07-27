@@ -19,20 +19,15 @@
         --muted: #8a7b6e;
       }
 
-      html, body {
-        height: 100%;
-      }
-
       body {
         font-family: 'Jost', sans-serif;
         background: var(--warm-white);
         color: var(--text);
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        min-height: 100vh;
-        padding: 2rem;
+        padding: 3rem 1.5rem 2rem;
         text-align: center;
       }
 
@@ -78,28 +73,22 @@
         opacity: 0.75;
       }
 
-      .chat-link {
-        display: inline-block;
-        margin-top: 2.5rem;
-        padding: 0.85rem 2.2rem;
-        background: var(--brown);
-        color: var(--cream);
-        font-family: 'Jost', sans-serif;
-        font-size: 0.82rem;
-        font-weight: 400;
-        letter-spacing: 0.15em;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: background 0.2s;
+      .chat-wrapper {
+        width: 100%;
+        max-width: 480px;
+        margin-top: 2rem;
+        flex: 1;
+        min-height: 350px;
       }
 
-      .chat-link:hover {
-        background: var(--dark);
+      #tawk_6a668afd85c9821d4774c81b {
+        width: 100%;
+        height: 100%;
+        min-height: 350px;
       }
 
       .footer-note {
-        position: fixed;
-        bottom: 1.5rem;
+        margin-top: 1.5rem;
         font-size: 0.72rem;
         letter-spacing: 0.1em;
         color: var(--muted);
@@ -125,23 +114,24 @@
       Write to me whenever you want — I am here.
     </p>
 
+    <div class="chat-wrapper">
+      <div id='tawk_6a668afd85c9821d4774c81b'></div>
+    </div>
 
     <p class="footer-note">szaboviolins.com/mei</p>
 
-<div id='tawk_6a668afd85c9821d4774c81b'></div>
-
-<!--Start of Tawk.to Script-->
-<script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); Tawk_API.embedded='tawk_6a668afd85c9821d4774c81b';
-(function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a668afd85c9821d4774c81b/1juga9bug';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);})();
-</script>
-<!--End of Tawk.to Script-->
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); Tawk_API.embedded='tawk_6a668afd85c9821d4774c81b';
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6a668afd85c9821d4774c81b/1juga9bug';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);})();
+    </script>
+    <!--End of Tawk.to Script-->
 
   </body>
 </html>
