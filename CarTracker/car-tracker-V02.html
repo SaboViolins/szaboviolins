@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Carnet de Route — Car Log</title>
+<style>
+  :root{
+    --bg: #1c1b1a;
+    --panel: #24221f;
+    --panel-2: #2c2924;
+    --line: #3a362f;
+    --text: #ede8e0;
+    --muted: #a89d8c;
+    --amber: #e8871e;
+    --amber-dim: #b8691a;
+    --good: #4f8f73;
+    --bad: #c4453b;
+    --mono: 'JetBrains Mono', 'Courier New', monospace;
+    --sans: -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:var(--sans); padding: 18px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  h1{
+    font-family:var(--mono); font-size:1.15rem; letter-spacing:0.5px;
+    color:var(--amber); margin:0 0 2px 0; text-transform:uppercase;
+  }
+  .sub{ color:var(--muted); font-size:0.82rem; margin-bottom:18px; }
+
+  .odometer{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:16px 14px; margin-bottom:14px;
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  }
+  @media(min-width:560px){ .odometer{ grid-template-columns:repeat(4,1fr); } }
+  .odo-cell{ text-align:left; }
+  .odo-label{ font-size:0.68rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.6px; }
+  .odo-value{ font-family:var(--mono); font-size:1.5rem; color:var(--text); margin-top:2px; }
+  .odo-value.accent{ color:var(--amber); }
+  .odo-value.good{ color:var(--good); }
+  .odo-value.bad{ color:var(--bad); }
+  .odo-unit{ font-size:0.7rem; color:var(--muted); }
+
+  .panel{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    padding:16px; margin-bottom:14px;
+  }
+  .panel h2{
+    font-family:var(--mono); font-size:0.8rem; text-transform:uppercase;
+    letter-spacing:0.6px; color:var(--muted); margin:0 0 12px 0;
+  }
+  .panel h2 .hint{ text-transform:none; letter-spacing:0; font-size:0.72rem; color:var(--muted); font-family:var(--sans); }
+
+  form{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  form .full{ grid-column:1/-1; }
+  label{ font-size:0.72rem; color:var(--muted); display:block; margin-bottom:4px; }
+  input, select{
+    width:100%; background:var(--panel-2); border:1px solid var(--line); color:var(--text);
+    border-radius:6px; padding:9px 10px; font-family:var(--mono); font-size:0.95rem;
+  }
+  input:focus, select:focus{ outline:none; border-color:var(--amber); }
+  .btn{
+    font-family:var(--mono); text-transform:uppercase; letter-spacing:0.5px; font-size:0.8rem;
+    background:var(--amber); color:#1c1b1a; border:none; border-radius:6px;
+    padding:11px 14px; cursor:pointer; font-weight:600;
+  }
+  .btn:active{ background:var(--amber-dim); }
+  .btn.ghost{
+    background:transparent; color:var(--muted); border:1px solid var(--line);
+    font-weight:400;
+  }
+  .btn.small{ padding:6px 10px; font-size:0.7rem; }
+  .row-actions{ display:flex; gap:8px; grid-column:1/-1; margin-top:4px; }
+
+  table{ width:100%; border-collapse:collapse; font-family:var(--mono); font-size:0.8rem; }
+  th{
+    text-align:left; color:var(--muted); font-weight:400; font-size:0.65rem;
+    text-transform:uppercase; letter-spacing:0.4px; padding:6px 8px; border-bottom:1px solid var(--line);
+    white-space:nowrap;
+  }
+  td{ padding:8px; border-bottom:1px solid var(--line); vertical-align:top; white-space:nowrap; }
+  tr:last-child td{ border-bottom:none; }
+  .consumption-cell.bad{ color:var(--bad); }
+  .consumption-cell.good{ color:var(--good); }
+  .del{ background:none; border:none; color:var(--muted); cursor:pointer; font-size:1rem; padding:0 4px; }
+  .del:active{ color:var(--bad); }
+  .empty{ color:var(--muted); font-size:0.85rem; padding:12px 0; }
+
+  canvas{ width:100%; height:140px; display:block; }
+
+  .top-actions{ display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap; }
+  #importFile{ display:none; }
+
+  .toast{
+    position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+    background:var(--panel-2); border:1px solid var(--amber); color:var(--text);
+    padding:9px 16px; border-radius:8px; font-family:var(--mono); font-size:0.78rem;
+    opacity:0; pointer-events:none; transition:opacity 0.25s; max-width:90vw; text-align:center;
+  }
+  .toast.show{ opacity:1; }
+
+  .oil-status{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    flex-wrap:wrap;
+  }
+  .oil-bar-track{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:5px;
+    height:8px; width:100%; overflow:hidden; margin-top:8px;
+  }
+  .oil-bar-fill{ height:100%; border-radius:5px; }
+</style>
+</head>
+<body>
+
+<h1>Carnet de Route</h1>
+<div class="sub">Fuel · cost · distance · maintenance — stored only on this device</div>
+
+<div class="odometer" id="summary"></div>
+
+<div class="panel">
+  <h2 id="formTitle">New fill-up</h2>
+  <form id="entryForm">
+    <div>
+      <label for="date">Date</label>
+      <input type="date" id="date" required>
+    </div>
+    <div>
+      <label for="odo">Odometer (km)</label>
+      <input type="number" id="odo" step="1" min="0" required placeholder="e.g. 84210">
+    </div>
+    <div class="full">
+      <label for="station">Petrol station</label>
+      <input type="text" id="station" placeholder="e.g. Total Mirecourt">
+    </div>
+    <div>
+      <label for="liters">Fuel added (L)</label>
+      <input type="number" id="liters" step="0.01" min="0" required placeholder="e.g. 38.5">
+    </div>
+    <div>
+      <label for="price">Price / liter (€)</label>
+      <input type="number" id="price" step="0.001" min="0" placeholder="e.g. 1.789">
+    </div>
+    <div class="full">
+      <label for="total">Total paid (€)</label>
+      <input type="number" id="total" step="0.01" min="0" required placeholder="auto-fills from price × liters">
+    </div>
+    <div class="full">
+      <label for="note">Note (optional)</label>
+      <input type="text" id="note" placeholder="e.g. highway trip">
+    </div>
+    <div class="row-actions">
+      <button type="submit" class="btn" id="submitBtn">Add entry</button>
+      <button type="button" class="btn ghost" id="cancelEditBtn" style="display:none;">Cancel edit</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Oil change tracker</h2>
+  <div id="oilStatus" class="oil-status"></div>
+  <div class="oil-bar-track"><div class="oil-bar-fill" id="oilBarFill" style="width:0%; background:var(--good);"></div></div>
+  <form id="oilForm" style="margin-top:14px;">
+    <div>
+      <label for="oilInterval">Change interval (km)</label>
+      <input type="number" id="oilInterval" step="100" min="0" placeholder="e.g. 10000">
+    </div>
+    <div>
+      <label for="oilLast">Odometer at last change (km)</label>
+      <input type="number" id="oilLast" step="1" min="0" placeholder="e.g. 78000">
+    </div>
+    <div class="row-actions">
+      <button type="submit" class="btn ghost small">Save</button>
+      <button type="button" class="btn ghost small" id="oilResetBtn">Just changed it now</button>
+    </div>
+  </form>
+</div>
+
+<div class="panel">
+  <h2>Consumption over time (L/100km)</h2>
+  <canvas id="chart"></canvas>
+  <div id="chartEmpty" class="empty" style="display:none;">Add at least two fill-ups to see a trend.</div>
+</div>
+
+<div class="panel">
+  <h2>Log</h2>
+  <div style="overflow-x:auto;">
+    <table id="logTable">
+      <thead>
+        <tr>
+          <th>Date</th><th>Station</th><th>Odo</th><th>Dist.</th><th>Fuel</th><th>€/L</th><th>L/100km</th><th>Paid</th><th>€/km</th><th></th>
+        </tr>
+      </thead>
+      <tbody id="logBody"></tbody>
+    </table>
+  </div>
+  <div id="logEmpty" class="empty" style="display:none;">No entries yet. Add your first fill-up above.</div>
+</div>
+
+<div class="top-actions">
+  <button class="btn ghost small" id="exportBtn">Export JSON</button>
+  <button class="btn ghost small" id="importBtn">Import JSON</button>
+  <button class="btn ghost small" id="exportCsvBtn">Export CSV</button>
+  <input type="file" id="importFile" accept="application/json">
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  const STORAGE_KEY = 'car_tracker_entries_v1';
+  const OIL_KEY = 'car_tracker_oil_v1';
+
+  function load(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){ return []; }
+  }
+  function save(entries){
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+  }
+  function loadOil(){
+    try{
+      const raw = localStorage.getItem(OIL_KEY);
+      return raw ? JSON.parse(raw) : { interval: null, lastOdo: null };
+    }catch(e){ return { interval: null, lastOdo: null }; }
+  }
+  function saveOil(o){
+    localStorage.setItem(OIL_KEY, JSON.stringify(o));
+  }
+  function toast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(()=>t.classList.remove('show'), 1800);
+  }
+
+  let entries = load();
+  let oil = loadOil();
+  let editingId = null;
+
+  function resetForm(){
+    editingId = null;
+    document.getElementById('entryForm').reset();
+    document.getElementById('date').value = new Date().toISOString().slice(0,10);
+    document.getElementById('formTitle').textContent = 'New fill-up';
+    document.getElementById('submitBtn').textContent = 'Add entry';
+    document.getElementById('cancelEditBtn').style.display = 'none';
+  }
+
+  function sorted(){
+    return [...entries].sort((a,b)=> a.odo - b.odo);
+  }
+
+  // each entry: {id, date, station, odo, liters, price, total, note}
+  function computeRows(){
+    const s = sorted();
+    return s.map((e, i)=>{
+      let dist = null, lp100 = null, perKm = null;
+      if(i > 0){
+        dist = e.odo - s[i-1].odo;
+        if(dist > 0){
+          lp100 = e.liters / dist * 100;
+          perKm = e.total / dist;
+        }
+      }
+      return {...e, dist, lp100, perKm};
+    });
+  }
+
+  function currentOdo(rows){
+    return rows.length ? rows[rows.length-1].odo : null;
+  }
+
+  function renderSummary(rows){
+    const el = document.getElementById('summary');
+    if(rows.length === 0){
+      el.innerHTML = `<div class="odo-cell"><div class="odo-label">Status</div><div class="odo-value">No data yet</div></div>`;
+      return;
+    }
+    const totalDist = rows.length > 1 ? rows[rows.length-1].odo - rows[0].odo : 0;
+    const totalSpent = rows.reduce((s,r)=> s + r.total, 0);
+    const withConsumption = rows.filter(r=> r.lp100 !== null);
+    const totalLiters = withConsumption.reduce((s,r)=> s + r.liters, 0);
+    const totalDistForAvg = withConsumption.reduce((s,r)=> s + r.dist, 0);
+    const avgConsumption = totalDistForAvg > 0 ? (totalLiters / totalDistForAvg * 100) : null;
+    const perKm = totalDist > 0 ? totalSpent / totalDist : null;
+
+    el.innerHTML = `
+      <div class="odo-cell">
+        <div class="odo-label">Total distance</div>
+        <div class="odo-value accent">${totalDist.toLocaleString()} <span class="odo-unit">km</span></div>
+      </div>
+      <div class="odo-cell">
+        <div class="odo-label">Total spent</div>
+        <div class="odo-value">${totalSpent.toFixed(2)} <span class="odo-unit">€</span></div>
+      </div>
+      <div class="odo-cell">
+        <div class="odo-label">Avg consumption</div>
+        <div class="odo-value">${avgConsumption !== null ? avgConsumption.toFixed(1) : '—'} <span class="odo-unit">L/100km</span></div>
+      </div>
+      <div class="odo-cell">
+        <div class="odo-label">Cost per km</div>
+        <div class="odo-value">${perKm !== null ? perKm.toFixed(3) : '—'} <span class="odo-unit">€/km</span></div>
+      </div>
+    `;
+  }
+
+  function renderOil(rows){
+    const statusEl = document.getElementById('oilStatus');
+    const barFill = document.getElementById('oilBarFill');
+    document.getElementById('oilInterval').value = oil.interval ?? '';
+    document.getElementById('oilLast').value = oil.lastOdo ?? '';
+
+    const odoNow = currentOdo(rows);
+    if(!oil.interval || oil.lastOdo === null || oil.lastOdo === undefined || odoNow === null){
+      statusEl.innerHTML = `<div class="odo-label">Set your interval and last change odometer below to start tracking.</div>`;
+      barFill.style.width = '0%';
+      return;
+    }
+    const used = odoNow - oil.lastOdo;
+    const remaining = oil.interval - used;
+    const pct = Math.max(0, Math.min(100, (used / oil.interval) * 100));
+    let color = 'var(--good)';
+    let statusText = `${remaining.toLocaleString()} km remaining`;
+    if(remaining <= 0){
+      color = 'var(--bad)';
+      statusText = `Overdue by ${Math.abs(remaining).toLocaleString()} km`;
+    } else if(remaining <= oil.interval * 0.1){
+      color = 'var(--bad)';
+      statusText = `${remaining.toLocaleString()} km remaining — due soon`;
+    } else if(remaining <= oil.interval * 0.25){
+      color = 'var(--amber)';
+      statusText = `${remaining.toLocaleString()} km remaining`;
+    }
+    barFill.style.width = pct + '%';
+    barFill.style.background = color;
+    statusEl.innerHTML = `
+      <div>
+        <div class="odo-label">Current odometer: ${odoNow.toLocaleString()} km</div>
+        <div class="odo-value" style="color:${color}; font-size:1.1rem;">${statusText}</div>
+      </div>
+    `;
+  }
+
+  function renderTable(rows){
+    const body = document.getElementById('logBody');
+    const empty = document.getElementById('logEmpty');
+    body.innerHTML = '';
+    if(rows.length === 0){
+      empty.style.display = 'block';
+      return;
+    }
+    empty.style.display = 'none';
+    [...rows].reverse().forEach(r=>{
+      const tr = document.createElement('tr');
+      const consClass = r.lp100 === null ? '' : (r.lp100 <= 7 ? 'good' : (r.lp100 >= 10 ? 'bad' : ''));
+      const priceDisplay = r.price !== undefined && r.price !== null && r.price !== ''
+        ? Number(r.price).toFixed(3)
+        : (r.liters ? (r.total / r.liters).toFixed(3) : '—');
+      tr.innerHTML = `
+        <td>${r.date}</td>
+        <td>${r.station ? r.station : '—'}</td>
+        <td>${r.odo.toLocaleString()}</td>
+        <td>${r.dist !== null ? r.dist.toLocaleString() : '—'}</td>
+        <td>${r.liters.toFixed(1)} L</td>
+        <td>${priceDisplay}</td>
+        <td class="consumption-cell ${consClass}">${r.lp100 !== null ? r.lp100.toFixed(1) : '—'}</td>
+        <td>${r.total.toFixed(2)} €</td>
+        <td>${r.perKm !== null ? r.perKm.toFixed(3) : '—'}</td>
+        <td>
+          <button class="del edit" data-id="${r.id}" title="Edit">✎</button>
+          <button class="del" data-id="${r.id}" title="Delete">✕</button>
+        </td>
+      `;
+      body.appendChild(tr);
+    });
+    body.querySelectorAll('.edit').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const e = entries.find(x=> x.id === btn.dataset.id);
+        if(!e) return;
+        editingId = e.id;
+        document.getElementById('date').value = e.date;
+        document.getElementById('station').value = e.station || '';
+        document.getElementById('odo').value = e.odo;
+        litersInput.value = e.liters;
+        priceInput.value = e.price !== null && e.price !== undefined ? e.price : '';
+        totalInput.value = e.total;
+        document.getElementById('note').value = e.note || '';
+        document.getElementById('formTitle').textContent = 'Edit fill-up';
+        document.getElementById('submitBtn').textContent = 'Update entry';
+        document.getElementById('cancelEditBtn').style.display = 'inline-block';
+        document.getElementById('entryForm').scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    });
+    body.querySelectorAll('.del:not(.edit)').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        if(editingId === btn.dataset.id){ resetForm(); }
+        entries = entries.filter(e => e.id !== btn.dataset.id);
+        save(entries);
+        renderAll();
+        toast('Entry deleted');
+      });
+    });
+  }
+
+  function renderChart(rows){
+    const canvas = document.getElementById('chart');
+    const emptyMsg = document.getElementById('chartEmpty');
+    const withConsumption = rows.filter(r=> r.lp100 !== null);
+    const dpr = window.devicePixelRatio || 1;
+    const cssWidth = canvas.clientWidth || canvas.parentElement.clientWidth;
+    canvas.width = cssWidth * dpr;
+    canvas.height = 140 * dpr;
+    const ctx = canvas.getContext('2d');
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    ctx.clearRect(0,0,cssWidth,140);
+
+    if(withConsumption.length < 2){
+      emptyMsg.style.display = 'block';
+      canvas.style.display = 'none';
+      return;
+    }
+    emptyMsg.style.display = 'none';
+    canvas.style.display = 'block';
+
+    const values = withConsumption.map(r=> r.lp100);
+    const max = Math.max(...values) * 1.15;
+    const min = Math.min(0, Math.min(...values) * 0.9);
+    const padL = 30, padR = 8, padT = 8, padB = 18;
+    const w = cssWidth - padL - padR;
+    const h = 140 - padT - padB;
+
+    ctx.strokeStyle = '#3a362f';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(padL, padT);
+    ctx.lineTo(padL, padT+h);
+    ctx.lineTo(padL+w, padT+h);
+    ctx.stroke();
+
+    ctx.fillStyle = '#a89d8c';
+    ctx.font = '10px monospace';
+    ctx.fillText(max.toFixed(0), 2, padT+8);
+    ctx.fillText(min.toFixed(0), 2, padT+h);
+
+    const stepX = values.length > 1 ? w / (values.length - 1) : 0;
+    ctx.strokeStyle = '#e8871e';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    values.forEach((v,i)=>{
+      const x = padL + i*stepX;
+      const y = padT + h - ((v - min)/(max - min || 1))*h;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    });
+    ctx.stroke();
+
+    ctx.fillStyle = '#e8871e';
+    values.forEach((v,i)=>{
+      const x = padL + i*stepX;
+      const y = padT + h - ((v - min)/(max - min || 1))*h;
+      ctx.beginPath();
+      ctx.arc(x,y,2.5,0,Math.PI*2);
+      ctx.fill();
+    });
+  }
+
+  function renderAll(){
+    const rows = computeRows();
+    renderSummary(rows);
+    renderOil(rows);
+    renderTable(rows);
+    renderChart(rows);
+  }
+
+  // --- auto-calc price / liters / total ---
+  const priceInput = document.getElementById('price');
+  const litersInput = document.getElementById('liters');
+  const totalInput = document.getElementById('total');
+
+  function recalcTotalFromPriceLiters(){
+    const p = parseFloat(priceInput.value);
+    const l = parseFloat(litersInput.value);
+    if(!isNaN(p) && !isNaN(l)){
+      totalInput.value = (p*l).toFixed(2);
+    }
+  }
+  function recalcPriceFromTotalLiters(){
+    const t = parseFloat(totalInput.value);
+    const l = parseFloat(litersInput.value);
+    if(!isNaN(t) && !isNaN(l) && l > 0){
+      priceInput.value = (t/l).toFixed(3);
+    }
+  }
+  priceInput.addEventListener('input', recalcTotalFromPriceLiters);
+  litersInput.addEventListener('input', recalcTotalFromPriceLiters);
+  totalInput.addEventListener('input', recalcPriceFromTotalLiters);
+
+  document.getElementById('entryForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const date = document.getElementById('date').value;
+    const station = document.getElementById('station').value.trim();
+    const odo = parseFloat(document.getElementById('odo').value);
+    const liters = parseFloat(litersInput.value);
+    const price = parseFloat(priceInput.value);
+    const total = parseFloat(totalInput.value);
+    const note = document.getElementById('note').value.trim();
+
+    if(!date || isNaN(odo) || isNaN(liters) || isNaN(total)){
+      toast('Please fill all required fields');
+      return;
+    }
+    if(entries.some(x=> x.odo === odo && x.id !== editingId)){
+      toast('An entry with this odometer reading already exists');
+      return;
+    }
+
+    if(editingId){
+      const idx = entries.findIndex(x=> x.id === editingId);
+      if(idx !== -1){
+        entries[idx] = { ...entries[idx], date, station, odo, liters, price: isNaN(price) ? null : price, total, note };
+      }
+      save(entries);
+      resetForm();
+      renderAll();
+      toast('Entry updated');
+      return;
+    }
+
+    entries.push({
+      id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
+      date, station, odo, liters, price: isNaN(price) ? null : price, total, note
+    });
+    save(entries);
+    resetForm();
+    renderAll();
+    toast('Entry added');
+  });
+
+  document.getElementById('cancelEditBtn').addEventListener('click', resetForm);
+
+  document.getElementById('oilForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const interval = parseFloat(document.getElementById('oilInterval').value);
+    const lastOdo = parseFloat(document.getElementById('oilLast').value);
+    oil = {
+      interval: isNaN(interval) ? null : interval,
+      lastOdo: isNaN(lastOdo) ? null : lastOdo
+    };
+    saveOil(oil);
+    renderAll();
+    toast('Oil tracker updated');
+  });
+
+  document.getElementById('oilResetBtn').addEventListener('click', function(){
+    const rows = computeRows();
+    const odoNow = currentOdo(rows);
+    if(odoNow === null){
+      toast('Add a fill-up first so I know the current odometer');
+      return;
+    }
+    oil.lastOdo = odoNow;
+    if(!oil.interval){
+      const i = parseFloat(document.getElementById('oilInterval').value);
+      oil.interval = isNaN(i) ? 10000 : i;
+    }
+    saveOil(oil);
+    renderAll();
+    toast('Oil change logged at ' + odoNow.toLocaleString() + ' km');
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', ()=>{
+    const blob = new Blob([JSON.stringify({ entries, oil }, null, 2)], {type:'application/json'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'car-log-' + new Date().toISOString().slice(0,10) + '.json';
+    a.click();
+  });
+
+  document.getElementById('exportCsvBtn').addEventListener('click', ()=>{
+    const rows = computeRows();
+    const header = ['date','station','odo_km','distance_km','liters','price_per_liter','l_per_100km','total_eur','eur_per_km','note'];
+    const lines = [header.join(',')];
+    rows.forEach(r=>{
+      const price = r.price !== undefined && r.price !== null ? r.price : (r.liters ? (r.total/r.liters) : '');
+      lines.push([
+        r.date, '"' + (r.station||'').replace(/"/g,'""') + '"', r.odo, r.dist ?? '', r.liters,
+        price !== '' ? Number(price).toFixed(3) : '',
+        r.lp100 !== null ? r.lp100.toFixed(2) : '',
+        r.total, r.perKm !== null ? r.perKm.toFixed(4) : '',
+        '"' + (r.note||'').replace(/"/g,'""') + '"'
+      ].join(','));
+    });
+    const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'car-log-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  });
+
+  document.getElementById('importBtn').addEventListener('click', ()=>{
+    document.getElementById('importFile').click();
+  });
+  document.getElementById('importFile').addEventListener('change', function(){
+    const file = this.files[0];
+    if(!file) return;
+    const reader = new FileReader();
+    reader.onload = function(){
+      try{
+        const parsed = JSON.parse(reader.result);
+        const data = Array.isArray(parsed) ? parsed : parsed.entries;
+        if(!Array.isArray(data)) throw new Error('bad format');
+        const existingOdos = new Set(entries.map(e=>e.odo));
+        let added = 0;
+        data.forEach(d=>{
+          if(d && typeof d.odo === 'number' && !existingOdos.has(d.odo)){
+            entries.push({
+              id: d.id || (Date.now().toString(36)+Math.random().toString(36).slice(2,6)),
+              date: d.date, station: d.station || '', odo: d.odo, liters: d.liters,
+              price: d.price ?? null, total: d.total, note: d.note || ''
+            });
+            existingOdos.add(d.odo);
+            added++;
+          }
+        });
+        if(!Array.isArray(parsed) && parsed.oil){
+          oil = parsed.oil;
+          saveOil(oil);
+        }
+        save(entries);
+        renderAll();
+        toast(added + ' entries imported');
+      }catch(err){
+        toast('Import failed: invalid file');
+      }
+    };
+    reader.readAsText(file);
+    this.value = '';
+  });
+
+  window.addEventListener('resize', ()=> renderAll());
+
+  resetForm();
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
