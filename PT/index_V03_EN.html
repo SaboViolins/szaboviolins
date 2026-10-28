@@ -121,8 +121,13 @@
     section{padding:60px 0}
     .btn.ghost{margin:12px 0 0}
     .voice{flex-direction:column}
-    .cat summary{padding:20px}
-    .cat .body{padding:0 20px 22px}
+    .cat summary{padding:20px 16px}
+    .cat summary .name{font-size:24px}
+    .cat .body{padding:0 14px 22px}
+    .cat table{font-size:14px;table-layout:fixed}
+    .cat th,.cat td{padding:8px 4px;word-wrap:break-word}
+    .cat th{font-size:11px;letter-spacing:0}
+    .bar-labels{font-size:12px;gap:10px}
   }
 </style>
 </head>
@@ -203,7 +208,7 @@
     <h2>Instruments and plans</h2>
     <p class="intro">Violins and violas are priced the same. Open a category to see how the payments work.</p>
 
-    <details class="cat" open>
+    <details class="cat">
       <summary><span class="name">Violins &amp; violas</span><span class="range">7,000€ - 10,000€</span></summary>
       <div class="body">
         <p>Start with 1,000€, then 250€ a month. The length of the plan depends on the price of the instrument.</p>
