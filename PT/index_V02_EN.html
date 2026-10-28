@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Keeps this page out of Google and other search engines -->
+<meta name="robots" content="noindex, nofollow">
+<title>SZABÓ István - Student Instrument Programme | Portugal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#f7f1e8;
+    --paper:#fffdf9;
+    --wood:#7a4a2a;
+    --wood-dark:#4a2c18;
+    --amber:#b5793e;
+    --ink:#2b221c;
+    --muted:#6f6258;
+    --line:#e4d8c8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:"Source Sans 3",sans-serif;font-weight:300;font-size:18px;line-height:1.7}
+  h1,h2,h3{font-family:"Cormorant Garamond",serif;font-weight:500;color:var(--wood-dark);line-height:1.2}
+  a{color:var(--wood)}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  .eyebrow{font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber);font-weight:600;margin-bottom:10px}
+  .note{background:#fff3d6;border:1px dashed var(--amber);color:#6b4a1f;font-size:14px;padding:6px 10px;border-radius:4px;display:inline-block;margin-top:10px}
+
+  /* Header */
+  header{border-bottom:1px solid var(--line);background:var(--paper)}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:18px;padding-bottom:18px;flex-wrap:wrap;gap:10px}
+  .brand{font-family:"Cormorant Garamond",serif;font-size:22px;color:var(--wood-dark);text-decoration:none}
+  .brand em{color:var(--amber)}
+  nav a{text-decoration:none;color:var(--muted);font-size:15px;margin-left:22px}
+  nav a:hover{color:var(--wood)}
+
+  /* Hero */
+  .hero{padding:90px 0 80px;text-align:center;background:linear-gradient(180deg,var(--paper),var(--cream))}
+  .hero h1{font-size:clamp(40px,6vw,64px)}
+  .hero h1 em{color:var(--amber)}
+  .hero p.lead{max-width:660px;margin:22px auto 34px;color:var(--muted);font-size:20px}
+  .btn{display:inline-block;background:var(--wood);color:#fff;text-decoration:none;padding:14px 30px;border-radius:2px;font-weight:400;letter-spacing:.04em}
+  .btn:hover{background:var(--wood-dark)}
+  .btn.ghost{background:transparent;color:var(--wood);border:1px solid var(--wood);margin-left:10px}
+
+  section{padding:80px 0}
+  section.alt{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(32px,4.5vw,44px);margin-bottom:20px}
+
+  /* Maker */
+  .maker{display:grid;grid-template-columns:1fr 1.3fr;gap:56px;align-items:center}
+  .maker img{width:100%;border-radius:2px;box-shadow:0 18px 40px rgba(74,44,24,.18)}
+  .maker p+p{margin-top:16px}
+
+  /* Instruments */
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
+  .card{background:var(--paper);border:1px solid var(--line);padding:0 0 24px}
+  section.alt .card{background:var(--cream)}
+  .ph{aspect-ratio:3/4;background:repeating-linear-gradient(45deg,#efe4d4,#efe4d4 12px,#f4ebdf 12px,#f4ebdf 24px);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;text-align:center;padding:20px}
+  .card h3{font-size:24px;margin:20px 22px 6px}
+  .card p{margin:0 22px;color:var(--muted);font-size:16px}
+
+  /* Plan */
+  .plan{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:start}
+  .price-box{background:var(--wood-dark);color:#f4e9da;padding:40px;border-radius:2px}
+  .price-box h3{color:#fff;font-size:30px;margin-bottom:6px}
+  .price-box .big{font-family:"Cormorant Garamond",serif;font-size:58px;color:#e8b676;line-height:1;margin:14px 0 4px}
+  .price-box ul{list-style:none;margin-top:24px;border-top:1px solid rgba(255,255,255,.15)}
+  .price-box li{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.15);display:flex;justify-content:space-between;gap:14px}
+  .price-box li span:last-child{color:#fff;font-weight:400;text-align:right}
+  .steps{counter-reset:s}
+  .step{position:relative;padding-left:62px;margin-bottom:30px}
+  .step::before{counter-increment:s;content:counter(s);position:absolute;left:0;top:0;width:42px;height:42px;border-radius:50%;border:1px solid var(--amber);color:var(--amber);font-family:"Cormorant Garamond",serif;font-size:22px;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:24px;margin-bottom:4px}
+  .step p{color:var(--muted);font-size:17px}
+
+  /* Timeline bar */
+  .timeline{margin-top:46px}
+  .bar{display:flex;height:46px;border-radius:2px;overflow:hidden;border:1px solid var(--line)}
+  .bar .down{flex:1000;background:var(--amber);color:#fff;font-size:13px;display:flex;align-items:center;justify-content:center}
+  .bar .m{flex:250;background:#e9d9c3;border-left:1px solid var(--paper)}
+  .bar .m:nth-child(odd){background:#e1ccb1}
+  .bar-labels{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:8px}
+
+  /* Bows */
+  .bows{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:36px}
+  .bow{border:1px solid var(--line);background:var(--paper);padding:34px}
+  .bow h3{font-size:28px}
+  .bow .tag{font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600}
+  .bow .p{font-family:"Cormorant Garamond",serif;font-size:36px;color:var(--wood);margin:10px 0}
+  .bow .p s{color:var(--muted);font-size:24px;margin-right:8px}
+
+  /* Promises */
+  .promises{display:grid;grid-template-columns:repeat(2,1fr);gap:22px 48px;margin-top:36px}
+  .promise h3{font-size:24px;margin-bottom:4px}
+  .promise p{color:var(--muted);font-size:17px}
+
+  /* Voices */
+  .voice{background:var(--paper);border-left:3px solid var(--amber);padding:28px 32px;margin-top:26px;display:flex;gap:24px;align-items:flex-start}
+  section.alt .voice{background:var(--cream)}
+  .voice img{width:76px;height:76px;border-radius:50%;object-fit:cover;flex-shrink:0}
+  .voice blockquote{font-family:"Cormorant Garamond",serif;font-style:italic;font-size:22px;line-height:1.45;color:var(--ink)}
+  .voice cite{display:block;font-style:normal;font-size:15px;color:var(--muted);margin-top:10px}
+  .voice cite b{color:var(--wood-dark);font-weight:600}
+  .partners{display:flex;flex-wrap:wrap;gap:18px;margin-top:34px}
+  .partners div{flex:1 1 200px;border:1px dashed var(--line);padding:22px;text-align:center;color:var(--muted);font-size:15px;background:var(--paper)}
+
+  /* FAQ */
+  details{border-bottom:1px solid var(--line);padding:18px 0}
+  summary{cursor:pointer;font-family:"Cormorant Garamond",serif;font-size:23px;color:var(--wood-dark);list-style:none}
+  summary::after{content:"+";float:right;color:var(--amber)}
+  details[open] summary::after{content:"-"}
+  details p{margin-top:10px;color:var(--muted)}
+
+  /* Contact */
+  .contact{text-align:center}
+  .contact p{max-width:620px;margin:0 auto 30px;color:var(--muted)}
+  .contact-grid{display:flex;justify-content:center;gap:50px;flex-wrap:wrap;margin-top:20px}
+  .contact-grid div span{display:block;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--amber);font-weight:600}
+  footer{text-align:center;font-size:14px;color:var(--muted);padding:34px 0;border-top:1px solid var(--line);background:var(--paper)}
+  .small{font-size:14px;color:var(--muted);margin-top:18px}
+
+  @media (max-width:820px){
+    .maker,.plan,.bows,.promises{grid-template-columns:1fr}
+    .grid3{grid-template-columns:1fr}
+    nav{display:none}
+    section{padding:60px 0}
+    .btn.ghost{margin:12px 0 0}
+    .voice{flex-direction:column}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="#">SZABÓ <em>István</em> · faiseur d'instruments</a>
+    <nav>
+      <a href="#maker">The maker</a>
+      <a href="#instruments">Instruments</a>
+      <a href="#plan">The plan</a>
+      <a href="#bows">Bows</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Student Instrument Programme · Portugal</div>
+    <h1>A maker's instrument,<br><em>within reach</em></h1>
+    <p class="lead">Handmade violins and violas for gifted students in Portugal, with a payment plan spread over two years - so you can study and start your career on an instrument you truly love.</p>
+    <a class="btn" href="#plan">See how it works</a>
+    <a class="btn ghost" href="#contact">Arrange a trial</a>
+  </div>
+</div>
+
+<!-- MAKER -->
+<section id="maker">
+  <div class="wrap maker">
+    <img src="https://szaboviolins.com/images/Pista.jpg" alt="István Szabó in his workshop">
+    <div>
+      <div class="eyebrow">The maker</div>
+      <h2>Nearly 40 years at the workbench</h2>
+      <p>I began as a violin and viola player, then trained as a maker in Paris under the master Lengyel László. For 20 years I made and cared for instruments for musicians in Taiwan, Singapore, Malaysia and Indonesia, before returning to Lorraine, near Mirecourt, where I work today.</p>
+      <p>Every instrument is made entirely by my own hands, from wood selection and preparation to the varnish, which I research and make myself.</p>
+      <p>I travel to Portugal regularly. That means I don't just sell an instrument and leave - I come back to adjust it, look after it, and see how it develops with its player.</p>
+      <p><a href="https://szaboviolins.com">Visit my main website →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUMENTS -->
+<section id="instruments" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">The instruments</div>
+    <h2>Instruments in the programme</h2>
+    <p style="max-width:700px;color:var(--muted)">These are fully professional instruments, not student models. The programme makes payment easier - it does not change the quality.</p>
+    <div class="grid3">
+      <div class="card">
+        <div class="ph">[ Photo of violin 1 ]</div>
+        <h3>Violin - [model / year]</h3>
+        <p>[Short description: model, wood, varnish, sound character.] Currently in Portugal for trial.</p>
+      </div>
+      <div class="card">
+        <div class="ph">[ Photo of violin 2 ]</div>
+        <h3>Violin - [model / year]</h3>
+        <p>[Short description.] Currently in Portugal for trial.</p>
+      </div>
+      <div class="card">
+        <div class="ph">[ Photo of viola ]</div>
+        <h3>Viola - [size / model]</h3>
+        <p>[Short description.] Available on request or on my next visit.</p>
+      </div>
+    </div>
+    <span class="note">Note for István: add real photos and short descriptions of the instruments you want in the programme.</span>
+  </div>
+</section>
+
+<!-- PLAN -->
+<section id="plan">
+  <div class="wrap">
+    <div class="eyebrow">The payment plan</div>
+    <h2>How it works</h2>
+    <div class="plan">
+      <div class="steps">
+        <div class="step">
+          <h3>Try the instrument</h3>
+          <p>The instruments are kept by teachers I work with in Portugal. Play one for two to three weeks, with your teacher, before deciding anything.</p>
+        </div>
+        <div class="step">
+          <h3>Sign a clear contract</h3>
+          <p>One simple written agreement, in Portuguese, with every condition explained before you sign.</p>
+        </div>
+        <div class="step">
+          <h3>Pay 1,000€ to start</h3>
+          <p>The instrument is then yours to play, take to lessons, concerts and exams.</p>
+        </div>
+        <div class="step">
+          <h3>Then 250€ a month</h3>
+          <p>For 24 months, by automatic bank transfer. No interest, no fees. When the last payment is made, the instrument is fully yours.</p>
+        </div>
+      </div>
+
+      <div class="price-box">
+        <h3>The violin set</h3>
+        <div style="opacity:.8">Violin or viola, ready to play</div>
+        <div class="big">7,000€</div>
+        <div style="opacity:.8">total - with no interest and no extra charges</div>
+        <ul>
+          <li><span>Instrument</span><span>Handmade by István Szabó</span></li>
+          <li><span>Bow</span><span>Good quality bow included</span></li>
+          <li><span>Case</span><span>Included</span></li>
+          <li><span>Rosin &amp; shoulder rest</span><span>Included</span></li>
+          <li><span>Start payment</span><span>1,000€</span></li>
+          <li><span>Monthly</span><span>250€ × 24 months</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="bar">
+        <div class="down">1,000€</div>
+        <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
+        <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
+        <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
+        <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
+      </div>
+      <div class="bar-labels"><span>Day 1: instrument in your hands</span><span>Month 24: fully yours</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOWS -->
+<section id="bows" class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Bows</div>
+    <h2>Choose your bow</h2>
+    <p style="max-width:700px;color:var(--muted)">The right bow changes how an instrument sounds and responds. Every set comes with a good bow, and you can choose a master-made bow at a special price.</p>
+    <div class="bows">
+      <div class="bow">
+        <div class="tag">Included in the set</div>
+        <h3>Quality student bow</h3>
+        <div class="p">Included</div>
+        <p style="color:var(--muted)">A reliable, well-balanced bow, chosen and adjusted to suit the instrument.</p>
+      </div>
+      <div class="bow">
+        <div class="tag">Optional</div>
+        <h3>Master bow by Yukari Katayama</h3>
+        <div class="p"><s>3,000€</s>2,000€</div>
+        <p style="color:var(--muted)">Handmade by Yukari Katayama, bow maker, [one line about her work]. Special price when bought together with one of my instruments, or within 12 months of buying it.</p>
+      </div>
+    </div>
+
+    <h3 style="font-size:28px;margin-top:50px">Ways to pay for the master bow</h3>
+    <p style="color:var(--muted);max-width:700px">Choose what suits your family best. The instrument plan stays the same in every case.</p>
+    <div class="grid3" style="grid-template-columns:repeat(2,1fr)">
+      <div class="bow">
+        <div class="tag">Option A</div>
+        <h3>One payment</h3>
+        <p style="color:var(--muted);margin-top:8px">2,000€ when you receive the bow.</p>
+      </div>
+      <div class="bow">
+        <div class="tag">Option B</div>
+        <h3>Two payments</h3>
+        <p style="color:var(--muted);margin-top:8px">1,000€ when you receive the bow, 1,000€ a month later.</p>
+      </div>
+      <div class="bow">
+        <div class="tag">Option C</div>
+        <h3>Spread over the first three months</h3>
+        <p style="color:var(--muted);margin-top:8px">Month 1: 1,000€ (instrument)<br>Month 2: 1,250€ (1,000€ bow + 250€ instrument)<br>Month 3: 1,250€ (1,000€ bow + 250€ instrument)<br>Then 250€ a month until the instrument is paid.</p>
+      </div>
+      <div class="bow">
+        <div class="tag">Option D</div>
+        <h3>Three equal starting months</h3>
+        <p style="color:var(--muted);margin-top:8px">Months 1-3: 1,000€ each (1,000€ instrument + 2,000€ bow)<br>Then 250€ a month for 24 months.<br>27 months in total.</p>
+      </div>
+    </div>
+    <span class="note">Note for István: only show this once Yukari has fully agreed. Keep the options you both like and remove the others before publishing.</span>
+  </div>
+</section>
+
+<!-- PROMISES -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Fair for both sides</div>
+    <h2>What the plan guarantees</h2>
+    <div class="promises">
+      <div class="promise">
+        <h3>No interest, no fees</h3>
+        <p>You pay the price of the instrument and nothing more.</p>
+      </div>
+      <div class="promise">
+        <h3>A difficult month is not a crisis</h3>
+        <p>If a month is hard, talk to me. A payment can be moved to the end of the plan without any penalty.</p>
+      </div>
+      <div class="promise">
+        <h3>Protected if the worst happens</h3>
+        <p>The instrument must be insured during the plan. If it is stolen or destroyed, you get back everything you have paid - or put it toward another of my instruments.</p>
+      </div>
+      <div class="promise">
+        <h3>Regular care</h3>
+        <p>During my visits to Portugal I check and adjust instruments from the programme.</p>
+      </div>
+      <div class="promise">
+        <h3>Pay early at any time</h3>
+        <p>You can pay off the remaining amount whenever you wish.</p>
+      </div>
+      <div class="promise">
+        <h3>Room to grow</h3>
+        <p>Later in your studies, payments already made can count toward one of my higher-range instruments.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="alt">
+  <div class="wrap">
+    <div class="eyebrow">Voices</div>
+    <h2>Musicians and teachers</h2>
+    <div class="voice">
+      <img src="https://szaboviolins.com/images/Marcos.jpg" alt="Marcos Lázaro">
+      <div>
+        <blockquote>The violins crafted by István's hands are true masterpieces, where art and technical perfection converge.</blockquote>
+        <cite><b>Marcos Lázaro</b> · Violinist &amp; Teacher, Gregorian Institute of Lisbon</cite>
+      </div>
+    </div>
+    <div class="voice">
+      <div class="ph" style="width:76px;height:76px;border-radius:50%;aspect-ratio:auto;padding:0;font-size:11px">[photo]</div>
+      <div>
+        <blockquote>[A few words from a teacher who supports the programme.]</blockquote>
+        <cite><b>[Teacher's name]</b> · [Instrument, school]</cite>
+      </div>
+    </div>
+    <div class="partners">
+      <div>[School / university, with permission]</div>
+      <div>[School / conservatoire, with permission]</div>
+      <div>[Orchestra / institution, with permission]</div>
+    </div>
+    <span class="note">Note for István: only names, photos and logos with written permission. Marcos's words come from your main website - ask him whether he'd like a new sentence about the programme.</span>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow">Questions</div>
+    <h2>Good to know</h2>
+    <details>
+      <summary>Who is the programme for?</summary>
+      <p>Students and young players who are serious about music, usually recommended by their teacher. For students under 18, a parent or guardian signs the contract.</p>
+    </details>
+    <details>
+      <summary>Who owns the instrument during the plan?</summary>
+      <p>The instrument remains my property until the last payment, then becomes fully yours. In daily life nothing changes - you play it as your own.</p>
+    </details>
+    <details>
+      <summary>What insurance is needed?</summary>
+      <p>A musical instrument insurance covering theft, accidental damage and transport, for the full value. Several Portuguese insurers offer this; I can help you find one.</p>
+    </details>
+    <details>
+      <summary>What if I need to stop?</summary>
+      <p>We talk first. If you cannot continue, you return the instrument in good condition. The full conditions are written clearly in the contract.</p>
+    </details>
+    <details>
+      <summary>Can I try several instruments?</summary>
+      <p>Yes. Some instruments are already in Portugal with teachers I work with, and I bring others on each visit.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="alt contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>Arrange a trial</h2>
+    <p>Write to me or ask your teacher. I'll put you in touch with the teacher who has the instrument you'd like to try, and tell you when I'm next in Portugal.</p>
+    <span class="note">Note for István: add the teachers' names and cities here once they agree.</span>
+    <div class="contact-grid">
+      <div><span>Email</span><a href="mailto:szistvan@zoho.com">szistvan@zoho.com</a></div>
+      <div><span>Phone / WhatsApp</span>+33 6 14 61 71 46</div>
+      <div><span>Workshop</span>Fraisnes-en-Saintois, France</div>
+    </div>
+    <p class="small">The conditions on this page are a summary. The written contract signed by both sides is what applies.</p>
+  </div>
+</section>
+
+<footer>SZABÓ István - Violin maker | Faiseur d'instruments · Fraisnes-en-Saintois, France</footer>
+
+</body>
+</html>
