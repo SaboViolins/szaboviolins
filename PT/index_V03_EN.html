@@ -82,6 +82,28 @@
   .bar .m:nth-child(odd){background:#e1ccb1}
   .bar-labels{display:flex;justify-content:space-between;font-size:14px;color:var(--muted);margin-top:8px}
 
+  /* Payment charts */
+  .pc-legend{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14px;color:var(--muted);margin:16px 0 14px}
+  .pc-legend span{display:inline-flex;align-items:center;gap:7px}
+  .pc-legend i{display:inline-block;width:15px;height:15px;border-radius:2px}
+  .pc-toggle{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--wood-dark);margin:4px 0 18px;cursor:pointer}
+  .pc-toggle input{width:18px;height:18px;accent-color:var(--wood-dark)}
+  .pc-year{margin-bottom:14px}
+  .pc-yhead{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:5px}
+  .pc-yhead b{color:var(--wood-dark);font-weight:600;text-transform:uppercase;letter-spacing:.14em;font-size:12px}
+  .pc-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;align-items:start}
+  .pc-mo{display:flex;flex-direction:column;gap:2px}
+  .pc-b{border-radius:2px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:400;line-height:1.05;overflow:hidden;font-size:12px}
+  .pc-b small{font-size:.8em;opacity:.8}
+  .pc-m{height:36px;background:#e9d9c3;color:#6a4a30}
+  .pc-m.alt{background:#e1ccb1}
+  .pc-last{height:36px;width:72%;background:#f3ebdf;color:#8b7765;font-size:11px;border:1px dashed #d8c7b1}
+  .pc-big{height:64px;background:var(--amber);color:#fff}
+  .pc-bow{height:64px;background:var(--wood-dark);color:#f4e9da}
+  .pc-vert{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
+  .pc-sum{font-size:16px;color:var(--muted);margin-top:6px}
+  .pc-sum b{color:var(--wood-dark);font-weight:600}
+
   .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:30px}
   .bow{border:1px solid var(--line);background:var(--cream);padding:30px}
   .bow h3{font-size:26px}
@@ -127,7 +149,10 @@
     .cat table{font-size:14px;table-layout:fixed}
     .cat th,.cat td{padding:8px 4px;word-wrap:break-word}
     .cat th{font-size:11px;letter-spacing:0}
-    .bar-labels{font-size:12px;gap:10px}
+    .pc-grid{gap:2px}
+    .pc-m{font-size:10px}
+    .pc-last{font-size:9px;width:80%}
+    .pc-big,.pc-bow{font-size:11px}
   }
 </style>
 </head>
@@ -211,31 +236,30 @@
     <details class="cat">
       <summary><span class="name">Violins &amp; violas</span><span class="range">7,000€ - 10,000€</span></summary>
       <div class="body">
-        <p>Start with 1,000€, then 250€ a month. The length of the plan depends on the price of the instrument.</p>
-        <table>
-          <tr><th>Instrument</th><th>Start</th><th>Monthly</th><th>Duration</th></tr>
-          <tr><td>7,000€</td><td>1,000€</td><td>250€</td><td>24 months</td></tr>
-          <tr><td>8,500€</td><td>1,000€</td><td>250€</td><td>30 months</td></tr>
-          <tr><td>10,000€</td><td>1,000€</td><td>250€</td><td>36 months</td></tr>
-        </table>
-        <div class="timeline">
-          <div class="bar">
-            <div class="down">1,000€</div>
-            <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
-            <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
-            <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
-            <div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div><div class="m"></div>
-          </div>
-          <div class="bar-labels"><span>Example 7,000€ - day 1: instrument in your hands</span><span>Month 24: fully yours</span></div>
+        <p>Example for an instrument at <b>7,000€</b>, the lowest price in this range. Higher prices in the range keep the same monthly amount - the plan simply lasts longer, up to 36 months.</p>
+        <div class="pc-legend">
+          <span><i style="background:var(--amber)"></i>Larger payment (1,000€)</span>
+          <span><i style="background:#e9d9c3"></i>Monthly payment</span>
+          <span><i style="background:var(--wood-dark)"></i>Optional bow</span>
         </div>
+        <label class="pc-toggle"><input type="checkbox" data-chart="c7"> Show with the optional master-made bow (+2,000€)</label>
+        <div id="c7"></div>
+        <p class="pc-sum"><b>7,000€:</b> 1,000€ to start, then 24 × 250€ - 25 months in total.</p>
       </div>
     </details>
 
     <details class="cat">
       <summary><span class="name">Violins &amp; violas</span><span class="range">above 10,000€</span></summary>
       <div class="body">
-        <p>For my higher-range instruments, the plan is agreed for each instrument, with a start payment from 2,000€ and monthly payments from 300€.</p>
-        <p>Ask me about the instruments available in this range and the plan that would suit you.</p>
+        <p>Example for an instrument at <b>12,000€</b>, the lowest price in this range. Here a second payment of 1,000€ comes one year after the first. For each instrument the plan is agreed individually, up to 36 months.</p>
+        <div class="pc-legend">
+          <span><i style="background:var(--amber)"></i>Larger payment (1,000€)</span>
+          <span><i style="background:#e9d9c3"></i>Monthly payment</span>
+          <span><i style="background:var(--wood-dark)"></i>Optional bow</span>
+        </div>
+        <label class="pc-toggle"><input type="checkbox" data-chart="c12"> Show with the optional master-made bow (+2,000€)</label>
+        <div id="c12"></div>
+        <p class="pc-sum"><b>12,000€:</b> 1,000€ to start, 1,000€ one year later, 33 × 300€ and a last payment of 100€ - 36 months in total.</p>
       </div>
     </details>
 
@@ -253,7 +277,7 @@
   <div class="wrap">
     <div class="eyebrow">Bows</div>
     <h2>Choose your bow</h2>
-    <p class="intro">The right bow changes how an instrument sounds and responds. Every set comes with a good bow, and violinists and violists can choose a master-made bow at a special price.</p>
+    <p class="intro">The right bow changes how an instrument sounds and responds. Every set comes with a good bow. Violinists and violists who wish can also choose a master-made bow at a special price.</p>
     <div class="grid2">
       <div class="bow">
         <div class="tag">Included in the set</div>
@@ -265,34 +289,10 @@
         <div class="tag">Optional</div>
         <h3>Master-made bow</h3>
         <div class="p"><s>3,000€</s>2,000€</div>
-        <p>Handmade by a professional bow maker I work with. Special price when bought together with one of my instruments, or within 12 months of buying it.</p>
+        <p>Optional - only if you wish. Handmade by a professional bow maker I work with, at a special price when bought together with one of my instruments, or within 12 months of buying it. Paid in two payments of 1,000€, in the first two months. You can see it in the price examples above.</p>
       </div>
     </div>
 
-    <h3 style="font-size:28px;margin-top:50px">Ways to pay for the master-made bow</h3>
-    <p class="intro">Choose what suits your family best. The instrument plan stays the same in every case. Examples below are for a 7,000€ instrument.</p>
-    <div class="grid2">
-      <div class="bow">
-        <div class="tag">Option A</div>
-        <h3>One payment</h3>
-        <p style="margin-top:8px">2,000€ when you receive the bow.</p>
-      </div>
-      <div class="bow">
-        <div class="tag">Option B</div>
-        <h3>Two payments</h3>
-        <p style="margin-top:8px">1,000€ when you receive the bow, 1,000€ a month later.</p>
-      </div>
-      <div class="bow">
-        <div class="tag">Option C</div>
-        <h3>Spread over the first three months</h3>
-        <p style="margin-top:8px">Month 1: 1,000€ (instrument)<br>Month 2: 1,250€ (1,000€ bow + 250€ instrument)<br>Month 3: 1,250€ (1,000€ bow + 250€ instrument)<br>Then 250€ a month until the instrument is paid.</p>
-      </div>
-      <div class="bow">
-        <div class="tag">Option D</div>
-        <h3>Three equal starting months</h3>
-        <p style="margin-top:8px">Months 1-3: 1,000€ each (1,000€ instrument + 2,000€ bow)<br>Then 250€ a month for 24 months.<br>27 months in total.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -400,17 +400,41 @@
 
 <footer>SZABÓ István - Violin maker | Faiseur d'instruments · Fraisnes-en-Saintois, France</footer>
 
-    <!--Start of Tawk.to Script-->
-    <script type="text/javascript">
-var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+<script>
 (function(){
-var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-s1.async=true;
-s1.src='https://embed.tawk.to/6a6475221320a91d463424c1/1juc6j3hg';
-s1.charset='UTF-8';
-s1.setAttribute('crossorigin','*');
-s0.parentNode.insertBefore(s1,s0);
+  function fmt(n){return n.toLocaleString('en-US')+'€'}
+  function build(first, second, monthly, count, last){
+    var m=[first]; for(var i=0;i<count;i++){ if(second && m.length===12) m.push(second); m.push(monthly); }
+    if(last) m.push(last); return m;
+  }
+  var plans={
+    c7: build(1000, 0, 250, 24, 0),
+    c12: build(1000, 1000, 300, 33, 100)
+  };
+  function render(id, withBow){
+    var months=plans[id], html='';
+    for(var y=0;y*12<months.length;y++){
+      var chunk=months.slice(y*12,y*12+12), inst=0, bow=0;
+      chunk.forEach(function(v,i){inst+=v; if(withBow && y===0 && i<2) bow+=1000;});
+      html+='<div class="pc-year"><div class="pc-yhead"><b>Year '+(y+1)+'</b><span>'+fmt(inst)+(bow?' + bow '+fmt(bow):'')+'</span></div><div class="pc-grid">';
+      chunk.forEach(function(v,i){
+        var n=y*12+i, cls, txt;
+        if(v>=1000){cls='pc-b pc-big';txt='<span class="pc-vert">'+fmt(v)+'</span>';}
+        else if(n===months.length-1 && v<months[1]){cls='pc-b pc-last';txt=v+'<small>€</small>';}
+        else {cls='pc-b pc-m'+(n%2?' alt':'');txt=v+'<small>€</small>';}
+        html+='<div class="pc-mo"><div class="'+cls+'" title="Month '+(n+1)+'">'+txt+'</div>';
+        if(withBow && n<2) html+='<div class="pc-b pc-bow" title="Optional bow"><span class="pc-vert">1,000€</span></div>';
+        html+='</div>';
+      });
+      html+='</div></div>';
+    }
+    document.getElementById(id).innerHTML=html;
+  }
+  Object.keys(plans).forEach(function(id){render(id,false);});
+  document.querySelectorAll('.pc-toggle input').forEach(function(cb){
+    cb.addEventListener('change',function(){render(cb.dataset.chart, cb.checked);});
+  });
 })();
-</script><!--End of Tawk.to Script-->
+</script>
 </body>
 </html>
