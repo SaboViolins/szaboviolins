@@ -104,6 +104,23 @@
   .pc-sum{font-size:16px;color:var(--muted);margin-top:6px}
   .pc-sum b{color:var(--wood-dark);font-weight:600}
 
+  .cat h3.pc-title{font-size:24px;margin:26px 0 2px}
+  .cat h3.pc-title:first-of-type{margin-top:6px}
+  .cat .pc-intro{font-size:16px;margin:0 0 4px}
+  .pc-sep{border:0;border-top:1px solid var(--line);margin:28px 0 0}
+  .maker-bow{display:grid;grid-template-columns:260px 1fr;gap:40px;align-items:start;margin-top:30px;background:var(--cream);border:1px solid var(--line);padding:30px}
+  .maker-bow .ph{width:100%;aspect-ratio:4/5;background:repeating-linear-gradient(45deg,#efe4d4,#efe4d4 12px,#f4ebdf 12px,#f4ebdf 24px);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;overflow:hidden;border-radius:2px}
+  .maker-bow .ph{position:relative}
+  .maker-bow .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .maker-bow h3{font-size:28px;margin-bottom:12px}
+  .maker-bow p{color:var(--muted);font-size:17px}
+  .maker-bow p+p{margin-top:12px}
+  .bow-prices{width:100%;border-collapse:collapse;margin:14px 0 8px;font-size:16px}
+  .bow-prices td{padding:9px 4px;border-bottom:1px solid var(--line);color:var(--ink)}
+  .bow-prices td:last-child{text-align:right;white-space:nowrap}
+  .bow-prices s{color:var(--muted);margin-right:8px}
+  .bow-prices b{color:var(--wood);font-weight:600}
+
   .grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:30px}
   .bow{border:1px solid var(--line);background:var(--cream);padding:30px}
   .bow h3{font-size:26px}
@@ -150,6 +167,8 @@
     .cat th,.cat td{padding:8px 4px;word-wrap:break-word}
     .cat th{font-size:11px;letter-spacing:0}
     .pc-grid{gap:2px}
+    .maker-bow{grid-template-columns:1fr;padding:22px;gap:22px}
+    .maker-bow .ph{max-width:300px}
     .pc-m{font-size:10px}
     .pc-last{font-size:9px;width:80%}
     .pc-big,.pc-bow{font-size:11px}
@@ -231,43 +250,67 @@
   <div class="wrap">
     <div class="eyebrow">Prices</div>
     <h2>Instruments and plans</h2>
-    <p class="intro">Violins and violas are priced the same. Open a category to see how the payments work.</p>
+    <p class="intro">Open an instrument to see examples of how the payments work.</p>
 
     <details class="cat">
-      <summary><span class="name">Violins &amp; violas</span><span class="range">7,000€ - 10,000€</span></summary>
+      <summary><span class="name">Violins</span></summary>
       <div class="body">
-        <p>Example for an instrument at <b>7,000€</b>, the lowest price in this range. Higher prices in the range keep the same monthly amount - the plan simply lasts longer, up to 36 months.</p>
         <div class="pc-legend">
           <span><i style="background:var(--amber)"></i>Larger payment (1,000€)</span>
           <span><i style="background:#e9d9c3"></i>Monthly payment</span>
           <span><i style="background:var(--wood-dark)"></i>Optional bow</span>
         </div>
-        <label class="pc-toggle"><input type="checkbox" data-chart="c7"> Show with the optional master-made bow (+2,000€)</label>
-        <div id="c7"></div>
-        <p class="pc-sum"><b>7,000€:</b> 1,000€ to start, then 24 × 250€ - 25 months in total.</p>
+        <h3 class="pc-title">Violins up to 10,000€</h3>
+        <p class="pc-intro">Example at <b>7,000€</b>. Instruments up to 10,000€ keep the same monthly amount - the plan simply lasts longer, up to 36 months.</p>
+        <label class="pc-toggle"><input type="checkbox" data-chart="vlo"> Show with the optional bow by Yukari Katayama (+2,000€)</label>
+        <div id="vlo"></div>
+        <p class="pc-sum" id="sum-vlo"></p>
+        <hr class="pc-sep">
+        <h3 class="pc-title">Violins above 10,000€</h3>
+        <p class="pc-intro">Example at <b>12,000€</b>. A second payment of 1,000€ comes one year after the first. The plan is agreed for each instrument, up to 36 months.</p>
+        <label class="pc-toggle"><input type="checkbox" data-chart="vhi"> Show with the optional bow by Yukari Katayama (+2,000€)</label>
+        <div id="vhi"></div>
+        <p class="pc-sum" id="sum-vhi"></p>
       </div>
     </details>
 
     <details class="cat">
-      <summary><span class="name">Violins &amp; violas</span><span class="range">above 10,000€</span></summary>
+      <summary><span class="name">Violas</span></summary>
       <div class="body">
-        <p>Example for an instrument at <b>12,000€</b>, the lowest price in this range. Here a second payment of 1,000€ comes one year after the first. For each instrument the plan is agreed individually, up to 36 months.</p>
+        <p class="pc-intro">Violas are priced the same as violins.</p>
         <div class="pc-legend">
           <span><i style="background:var(--amber)"></i>Larger payment (1,000€)</span>
           <span><i style="background:#e9d9c3"></i>Monthly payment</span>
           <span><i style="background:var(--wood-dark)"></i>Optional bow</span>
         </div>
-        <label class="pc-toggle"><input type="checkbox" data-chart="c12"> Show with the optional master-made bow (+2,000€)</label>
-        <div id="c12"></div>
-        <p class="pc-sum"><b>12,000€:</b> 1,000€ to start, 1,000€ one year later, 33 × 300€ and a last payment of 100€ - 36 months in total.</p>
+        <h3 class="pc-title">Violas up to 10,000€</h3>
+        <p class="pc-intro">Example at <b>7,000€</b>. Instruments up to 10,000€ keep the same monthly amount - the plan simply lasts longer, up to 36 months.</p>
+        <label class="pc-toggle"><input type="checkbox" data-chart="alo"> Show with the optional bow by Yukari Katayama (+2,100€)</label>
+        <div id="alo"></div>
+        <p class="pc-sum" id="sum-alo"></p>
+        <hr class="pc-sep">
+        <h3 class="pc-title">Violas above 10,000€</h3>
+        <p class="pc-intro">Example at <b>12,000€</b>. A second payment of 1,000€ comes one year after the first. The plan is agreed for each instrument, up to 36 months.</p>
+        <label class="pc-toggle"><input type="checkbox" data-chart="ahi"> Show with the optional bow by Yukari Katayama (+2,100€)</label>
+        <div id="ahi"></div>
+        <p class="pc-sum" id="sum-ahi"></p>
       </div>
     </details>
 
     <details class="cat">
-      <summary><span class="name">Cellos</span><span class="range">plan in preparation</span></summary>
+      <summary><span class="name">Cellos</span></summary>
       <div class="body">
-        <p>I am preparing a plan for cellos together with cello teachers in Portugal, so that it fits the needs of students here.</p>
-        <p>If you are a cellist and interested, please get in touch - your feedback will help shape it.</p>
+        <p class="pc-intro">I am preparing the cello plan together with cello teachers in Portugal, so the details may still change.</p>
+        <div class="pc-legend">
+          <span><i style="background:var(--amber)"></i>Larger payment (1,000€)</span>
+          <span><i style="background:#e9d9c3"></i>Monthly payment</span>
+          <span><i style="background:var(--wood-dark)"></i>Optional bow</span>
+        </div>
+        <h3 class="pc-title">Cello at 12,000€</h3>
+        <p class="pc-intro">Example at <b>12,000€</b>, with the same plan as violins and violas at this price: 1,000€ at the start and again one year later, then 300€ a month.</p>
+        <label class="pc-toggle"><input type="checkbox" data-chart="cel"> Show with the optional bow by Yukari Katayama (+2,400€)</label>
+        <div id="cel"></div>
+        <p class="pc-sum" id="sum-cel"></p>
       </div>
     </details>
   </div>
@@ -277,7 +320,7 @@
   <div class="wrap">
     <div class="eyebrow">Bows</div>
     <h2>Choose your bow</h2>
-    <p class="intro">The right bow changes how an instrument sounds and responds. Every set comes with a good bow. Violinists and violists who wish can also choose a master-made bow at a special price.</p>
+    <p class="intro">The right bow changes how an instrument sounds and responds. Every set comes with a good bow. If you wish, you can also choose a master-made bow by Yukari Katayama at a special price.</p>
     <div class="grid2">
       <div class="bow">
         <div class="tag">Included in the set</div>
@@ -287,12 +330,27 @@
       </div>
       <div class="bow">
         <div class="tag">Optional</div>
-        <h3>Master-made bow</h3>
-        <div class="p"><s>3,000€</s>2,000€</div>
-        <p>Optional - only if you wish. Handmade by a professional bow maker I work with, at a special price when bought together with one of my instruments, or within 12 months of buying it. Paid in two payments of 1,000€, in the first two months. You can see it in the price examples above.</p>
+        <h3>Bow by Yukari Katayama</h3>
+        <table class="bow-prices">
+          <tr><td>Violin bow</td><td><s>3,000€</s><b>2,000€</b></td></tr>
+          <tr><td>Viola bow</td><td><s>3,100€</s><b>2,100€</b></td></tr>
+          <tr><td>Cello bow</td><td><s>3,400€</s><b>2,400€</b></td></tr>
+        </table>
+        <p>Special price when bought together with one of my instruments, or within 12 months of buying it. Paid in two equal payments, in the first two months.</p>
       </div>
     </div>
 
+    <div class="maker-bow">
+      <div class="ph"><img src="images/yukari.jpg" alt="Yukari Katayama, bow maker" onerror="this.remove()"><span>Photo</span></div>
+      <div>
+        <h3>Yukari Katayama – Bow Maker</h3>
+        <p>Yukari Katayama was born in Tokyo, Japan. Her journey into the world of string instruments began with a childhood dream of playing the violin. As an adult, she finally began learning the violin and later went on to study violin making in Tokyo.</p>
+        <p>After graduating, she gained professional experience working as a repairer in string instrument workshops in Japan and Southeast Asia. However, bow making had always been her true passion. Before moving to Europe, she had the opportunity to train with Canadian bow maker Michael Vann.</p>
+        <p>In 2016, she settled in France, where she continued her training with bow makers Catherine Baroin in Mirecourt and Pascal Camurat in Montpellier. These experiences marked a turning point in her career, allowing her to dedicate herself fully to the art of bow making.</p>
+        <p>Today, she works as an independent bow maker in Mirecourt, specialising in the making and maintenance of violin, viola and cello bows.</p>
+        <p>Inspired by the French tradition of bow making, her work combines precision, functional balance and attention to detail, reflecting her dedication to quality craftsmanship and the art of bow making.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -403,19 +461,28 @@
 <script>
 (function(){
   function fmt(n){return n.toLocaleString('en-US')+'€'}
-  function build(first, second, monthly, count, last){
-    var m=[first]; for(var i=0;i<count;i++){ if(second && m.length===12) m.push(second); m.push(monthly); }
-    if(last) m.push(last); return m;
+  // 1,000€ to start, then the monthly amount; 'extra' = how many further 1,000€ payments, one at the start of each new year
+  function build(total, monthly, extra){
+    var m=[1000], paid=1000, used=0;
+    while(paid<total){
+      var v = (used<extra && m.length%12===0) ? (used++,1000) : monthly;
+      if(paid+v>total) v=total-paid;
+      m.push(v); paid+=v;
+    }
+    return m;
   }
   var plans={
-    c7: build(1000, 0, 250, 24, 0),
-    c12: build(1000, 1000, 300, 33, 100)
+    vlo:{m:build(7000,250,0), bow:[1000,1000]},
+    vhi:{m:build(12000,300,1), bow:[1000,1000]},
+    alo:{m:build(7000,250,0), bow:[1050,1050]},
+    ahi:{m:build(12000,300,1), bow:[1050,1050]},
+    cel:{m:build(12000,300,1), bow:[1200,1200]}
   };
   function render(id, withBow){
-    var months=plans[id], html='';
+    var p=plans[id], months=p.m, html='';
     for(var y=0;y*12<months.length;y++){
       var chunk=months.slice(y*12,y*12+12), inst=0, bow=0;
-      chunk.forEach(function(v,i){inst+=v; if(withBow && y===0 && i<2) bow+=1000;});
+      chunk.forEach(function(v,i){inst+=v; if(withBow && y===0 && i<p.bow.length) bow+=p.bow[i];});
       html+='<div class="pc-year"><div class="pc-yhead"><b>Year '+(y+1)+'</b><span>'+fmt(inst)+(bow?' + bow '+fmt(bow):'')+'</span></div><div class="pc-grid">';
       chunk.forEach(function(v,i){
         var n=y*12+i, cls, txt;
@@ -423,12 +490,14 @@
         else if(n===months.length-1 && v<months[1]){cls='pc-b pc-last';txt=v+'<small>€</small>';}
         else {cls='pc-b pc-m'+(n%2?' alt':'');txt=v+'<small>€</small>';}
         html+='<div class="pc-mo"><div class="'+cls+'" title="Month '+(n+1)+'">'+txt+'</div>';
-        if(withBow && n<2) html+='<div class="pc-b pc-bow" title="Optional bow"><span class="pc-vert">1,000€</span></div>';
+        if(withBow && n<p.bow.length) html+='<div class="pc-b pc-bow" title="Month '+(n+1)+' - bow"><span class="pc-vert">'+fmt(p.bow[n])+'</span></div>';
         html+='</div>';
       });
       html+='</div></div>';
     }
     document.getElementById(id).innerHTML=html;
+    var total=months.reduce(function(a,b){return a+b;},0), bowTotal=p.bow[0]+p.bow[1];
+    document.getElementById('sum-'+id).innerHTML='<b>Total:</b> '+fmt(total)+(withBow?' + '+fmt(bowTotal)+' bow':'');
   }
   Object.keys(plans).forEach(function(id){render(id,false);});
   document.querySelectorAll('.pc-toggle input').forEach(function(cb){
@@ -436,7 +505,6 @@
   });
 })();
 </script>
-
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
